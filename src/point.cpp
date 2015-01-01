@@ -1,7 +1,12 @@
 
 #include <math.h>
 #include <stdlib.h>
+#include "util.hpp"
 #include "point.hpp"
+
+Point::Point() {
+
+}
 
 Point::Point(double x, double y) {
     this->x = x;
@@ -43,7 +48,7 @@ void Point::set_z(double z) {
     this->z = z;
 }
 
-double Point::euclid_dist(Point* other_point) {
+double Point::euclid_dist(Point *other_point) {
 
     double px = pow(this->x - other_point->get_x(), 2);
     double py = pow(this->y - other_point->get_y(), 2);
@@ -52,7 +57,13 @@ double Point::euclid_dist(Point* other_point) {
 
 }
 
-Point* Point::to_unit_vector() {
+Point *Point::to_unit_vector() {
     double mag = this->euclid_dist(new Point(0, 0, 0));
     return new Point(this->x / mag, this->y / mag, this->z / mag);
+}
+
+Point *Point::get_random_point_2d(double width, double height) {
+    double x = rand_float(0, width);
+    double y = rand_float(0, height);
+    return new Point(x, y);
 }

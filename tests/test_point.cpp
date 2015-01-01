@@ -3,8 +3,8 @@
 #include <iostream>
 
 int main() {
-    Point *p1 = new Point(1, 1);
-    Point *p2 = new Point(2, 2);
+    Point *p1 = Point::get_random_point_2d(5, 5);
+    Point *p2 = Point::get_random_point_2d(5, 5);
     std::cout << p1->euclid_dist(p2);
     return 0;
 }
