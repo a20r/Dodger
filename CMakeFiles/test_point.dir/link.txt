@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/test_point.dir/tests/test_point.cpp.o CMakeFiles/test_point.dir/src/point.cpp.o  -o bin/test_point -rdynamic 
