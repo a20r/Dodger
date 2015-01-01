@@ -10,3 +10,5 @@ aux_source_directory(src SRC)
 
 add_executable(test_point tests/test_point.cpp ${SRC})
 add_executable(test_st_point tests/test_st_point.cpp ${SRC})
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3")
