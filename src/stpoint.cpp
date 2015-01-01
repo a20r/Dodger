@@ -1,6 +1,5 @@
 
 #include "math.h"
-#include "point.hpp"
 #include "stpoint.hpp"
 
 STPoint::STPoint(double x, double y, double z, double t) {

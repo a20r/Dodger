@@ -1,4 +1,6 @@
 
+#include "point.hpp"
+
 class STPoint : public Point {
 
     public:

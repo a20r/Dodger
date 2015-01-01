@@ -1,6 +1,7 @@
 
 #include <math.h>
 #include <stdlib.h>
+#include <new>
 #include "util.hpp"
 #include "point.hpp"
 
@@ -59,11 +60,11 @@ double Point::euclid_dist(Point *other_point) {
 
 Point *Point::to_unit_vector() {
     double mag = this->euclid_dist(new Point(0, 0, 0));
-    return new Point(this->x / mag, this->y / mag, this->z / mag);
+    return new (std::nothrow) Point(this->x / mag, this->y / mag, this->z / mag);
 }
 
 Point *Point::get_random_point_2d(double width, double height) {
     double x = rand_float(0, width);
     double y = rand_float(0, height);
-    return new Point(x, y);
+    return new (std::nothrow) Point(x, y);
 }
