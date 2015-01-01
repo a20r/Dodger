@@ -1,7 +1,7 @@
 
 #include <math.h>
 #include <stdlib.h>
-#include "include/point.hpp"
+#include "point.hpp"
 
 Point::Point(double x, double y) {
     this->x = x;
