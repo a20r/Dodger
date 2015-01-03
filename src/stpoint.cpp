@@ -16,11 +16,7 @@ STPoint::STPoint(double x, double y, double t) {
     this->t = t;
 }
 
-STPoint::~STPoint() {
-
-}
-
-double STPoint::get_t() {
+double STPoint::get_t() const {
     return this->t;
 }
 
@@ -34,4 +30,21 @@ double STPoint::st_dist(STPoint *other_point) {
     double pz = pow(this->z - other_point->get_z(), 2);
     double pt = pow(this->t - other_point->get_t(), 2);
     return sqrt(px + py + pz + pt);
+}
+
+STPointWeight::STPointWeight(STPoint val, double weight) {
+    this->val = val;
+    this->weight = weight;
+}
+
+STPoint STPointWeight::get_val() {
+    return this->val;
+}
+
+double STPointWeight::get_weight() {
+    return this->weight;
+}
+
+bool STPointWeight::operator<(STPointWeight& right) {
+    return this->weight < right.get_weight();
 }

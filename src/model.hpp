@@ -1,4 +1,7 @@
 
+#ifndef MODEL_H
+#define MODEL_H
+
 class Model {
 
     public:
@@ -45,3 +48,5 @@ class SinModel : public Model {
         double d;
 
 };
+
+#endif
