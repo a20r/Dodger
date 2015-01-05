@@ -36,3 +36,4 @@ bin/
 lib/
 sandbox/
 .ropeproject/
+*.pyc
