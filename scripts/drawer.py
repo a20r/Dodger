@@ -3,7 +3,7 @@
 # because stupid pylint
 __all__ = ["Axes3D"]
 
-import pylab as plt
+import matplotlib.pyplot as plt
 import warnings
 from mpl_toolkits.mplot3d import Axes3D
 
