@@ -12,7 +12,8 @@ import sys
 
 
 def print_usage():
-    print "Usage:\n\tpython scripts/run_animator.py [file name]"
+    print "Usage:\n\tpython scripts/run_animator.py [search json file name] "\
+        + "[figure output directory]"
 
 
 def run():
@@ -33,7 +34,8 @@ def run():
             fig = plt.figure()
             ax_an = fig.add_subplot(111)
 
-            anmtr = animator.Animator(fig, ax_an, b_path, *agents)
+            anmtr = animator.Animator(fig, ax_an, b_path, *agents,
+                                      fig_dir=sys.argv[2])
             anmtr.run()
     except IndexError:
         print_usage()

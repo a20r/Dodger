@@ -2,7 +2,7 @@
 #ifndef ROADMAP_H
 #define ROADMAP_H
 
-#include <map>
+#include <tr1/unordered_map>
 #include <set>
 #include <list>
 #include <string>
@@ -25,8 +25,8 @@ class Roadmap {
         void add_edge(Point p, Point q);
         PointGrid gd;
         double max_dist;
-        std::map<std::string, std::set<std::string>> edges;
-        std::map<std::string, Point> decoder;
+        std::tr1::unordered_map<std::string, std::set<std::string>> edges;
+        std::tr1::unordered_map<std::string, Point> decoder;
         std::set<std::string> nodes;
 };
 

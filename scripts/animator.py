@@ -14,6 +14,7 @@ class Animator(object):
         self.ax.set_ylabel("Y Location")
         self.ax.set_xlim(kwargs.get("x_min", -1), kwargs.get("x_max", 5))
         self.ax.set_ylim(kwargs.get("y_min", -1), kwargs.get("y_max", 5))
+        self.fig_dir = kwargs.get("fig_dir", "sandbox/figs/");
         self.path = path
         self.agents = agents
         self.agent_plots = [self.ax.scatter([], []) for _ in agents]
@@ -44,6 +45,6 @@ class Animator(object):
             [self.goal_x], [self.goal_y], marker="o", color="g", s=200)
         while t < self.path[-1].t:
             self.update(t)
-            plt.savefig("sandbox/figs/%05d.png" % i)
+            plt.savefig(self.fig_dir + ("%05d.png" % i))
             i += 1
             t += time_step

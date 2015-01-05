@@ -2,6 +2,8 @@
 #include <iostream>
 #include <iterator>
 #include <list>
+#include <stdlib.h>
+#include <time.h>
 #include "point.hpp"
 #include "roadmap.hpp"
 #include "rmgenerator.hpp"
@@ -11,6 +13,8 @@
 #include "search.hpp"
 
 int main() {
+
+    srand(time(NULL));
 
     double speed = 2;
     double wait_time = 0.1;
@@ -50,7 +54,7 @@ int main() {
 
     Point start(2, 0);
     Point goal(2, 4);
-    RoadmapGenerator rmgr(5, 5, start, 0.3);
+    RoadmapGenerator rmgr(4, 4, start, 0.3);
     Roadmap rm = rmgr.generate(1000);
 
     Search search(rm, speed, wait_time);

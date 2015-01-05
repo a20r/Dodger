@@ -60,10 +60,10 @@ Path Search::get_path(Point s_pt, Point e_pt, std::list<Agent> agents) {
     this->rm.insert(e_pt);
 
     std::list<STPoint> neighbours;
-    std::map<std::string, int> num_visited;
-    std::map<std::string, STPoint> decoder;
-    std::map<std::string, std::string> parents;
-    std::map<std::string, double> max_costs;
+    std::tr1::unordered_map<std::string, int> num_visited;
+    std::tr1::unordered_map<std::string, STPoint> decoder;
+    std::tr1::unordered_map<std::string, std::string> parents;
+    std::tr1::unordered_map<std::string, double> max_costs;
     std::priority_queue<STPointWeight> open_set;
     STPoint first(s_pt.get_x(), s_pt.get_y(), 0);
     STPointWeight first_weight(first, 0);
@@ -77,8 +77,6 @@ Path Search::get_path(Point s_pt, Point e_pt, std::list<Agent> agents) {
 
     while (!open_set.empty()) {
         current = open_set.top();
-        // std::cout << current.get_val().str() <<
-            // " " << current.get_weight() << std::endl;
         open_set.pop();
         decoder[current.get_val().str()] = current.get_val();
         if (current.get_val().euclid_dist(e_pt) < GOAL_RADIUS) {
@@ -118,8 +116,9 @@ Path Search::get_path(Point s_pt, Point e_pt, std::list<Agent> agents) {
     }
 }
 
-Path Search::backtrack_path(std::map<std::string, std::string> parents,
-        STPoint goal, std::map<std::string, STPoint> decoder) {
+Path Search::backtrack_path(
+        std::tr1::unordered_map<std::string, std::string> parents,
+        STPoint goal, std::tr1::unordered_map<std::string, STPoint> decoder) {
 
     std::list<STPoint> path_list;
 
