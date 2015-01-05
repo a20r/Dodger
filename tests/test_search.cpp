@@ -17,28 +17,28 @@ int main() {
     std::list<Agent> agents;
 
     Agent ag(
-        SinModel(2, 1, 1, 2),
-        LinearModel(0, 1));
+        new SinModel(2, 1, 1, 2),
+        new LinearModel(0, 1));
 
     Agent ag2(
-        SinModel(-2, 2, 1, 2),
-        LinearModel(0, 1.3));
+        new SinModel(-2, 2, 1, 2),
+        new LinearModel(0, 1.3));
 
     Agent ag3(
-        SinModel(2, 2.5, 1, 2),
-        LinearModel(0, 1.8));
+        new SinModel(2, 2.5, 1, 2),
+        new LinearModel(0, 1.8));
 
     Agent ag4(
-        SinModel(-2, 3, 1, 2),
-        LinearModel(0, 2.1));
+        new SinModel(-2, 3, 1, 2),
+        new LinearModel(0, 2.1));
 
     Agent ag5(
-        SinModel(2, 5, 1, 2),
-        LinearModel(0, 2.5));
+        new SinModel(2, 5, 1, 2),
+        new LinearModel(0, 2.5));
 
     Agent ag6(
-        SinModel(-2, 4, 1, 2),
-        LinearModel(0, 3));
+        new SinModel(-2, 4, 1, 2),
+        new LinearModel(0, 3));
 
 
     agents.push_back(ag);
@@ -50,11 +50,11 @@ int main() {
 
     Point start(2, 0);
     Point goal(2, 4);
-    RoadmapGenerator rmgr(5, 5, start, 0.5);
+    RoadmapGenerator rmgr(5, 5, start, 0.3);
     Roadmap rm = rmgr.generate(1000);
 
     Search search(rm, speed, wait_time);
     Path path = search.get_path(start, goal, agents);
-    std::cout << path.json() << std::endl;
-    std::cout << path.get_list().size() << std::endl;
+    std::cout << Search::json(path, agents) << std::endl;
+
 }

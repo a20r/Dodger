@@ -7,24 +7,23 @@ class Model {
     public:
         Model() {};
         ~Model() {};
-        virtual double call(double t) {
-            return t;
-        };
-
+        virtual double call(double t) = 0;
+        virtual std::string json() = 0;
 };
 
 class LinearModel : public Model {
 
     public:
-        LinearModel(double m, double b) {
-            this->m = m;
+        LinearModel(double a, double b) {
+            this->a = a;
             this->b = b;
         };
         ~LinearModel() {};
         double call(double t);
+        std::string json();
 
     private:
-        double m;
+        double a;
         double b;
 
 };
@@ -40,6 +39,7 @@ class SinModel : public Model {
         };
         ~SinModel() {};
         double call(double t);
+        std::string json();
 
     private:
         double a;

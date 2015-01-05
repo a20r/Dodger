@@ -51,9 +51,9 @@ Point STPoint::to_point() {
 
 std::string STPoint::json() {
     std::stringstream buffer;
-    buffer << "{\n\t\"x\": " << this->x << ",\n\t\"y\": " << this->y
-        << ",\n\t\"z\": " << this->z << ",\n\t\"t\": " << this->t
-        << "\n}";
+    buffer << "{\"x\": " << this->x << ",\"y\": " << this->y
+        << ",\"z\": " << this->z << ",\"t\": " << this->t
+        << "}";
     return buffer.str();
 }
 

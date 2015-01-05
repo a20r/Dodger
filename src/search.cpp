@@ -1,4 +1,5 @@
 
+#include <sstream>
 #include <queue>
 #include <iostream>
 #include "search.hpp"
@@ -134,4 +135,25 @@ Path Search::backtrack_path(std::map<std::string, std::string> parents,
             current = decoder[parents[current.str()]];
         }
     }
+}
+
+std::string Search::json(Path path, std::list<Agent> agents) {
+
+    std::list<Agent>::iterator iterator;
+    std::stringstream buffer;
+    buffer << "{\"agents\": [";
+    int i = 0;
+    for (iterator = agents.begin(); iterator != agents.end();
+            ++iterator) {
+        buffer << (*iterator).json();
+        if (i++ < agents.size() - 1) {
+            buffer << ",";
+        }
+    }
+
+    buffer << "],";
+
+    buffer << "\"path\":" << path.json() << "}";
+    return buffer.str();
+
 }

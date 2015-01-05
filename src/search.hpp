@@ -26,6 +26,7 @@ class Search {
         Path get_path(Point s_pt, Point e_pt, std::list<Agent> agents);
         Path backtrack_path(std::map<std::string, std::string> parents,
                 STPoint goal, std::map<std::string, STPoint> decoder);
+        static std::string json(Path path, std::list<Agent> agents);
 
     private:
         Roadmap rm;

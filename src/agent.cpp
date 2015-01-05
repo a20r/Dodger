@@ -1,10 +1,11 @@
 
 #include <iostream>
+#include <sstream>
 #include <math.h>
 #include "point.hpp"
 #include "agent.hpp"
 
-Agent::Agent(Model model_x, Model model_y) {
+Agent::Agent(Model *model_x, Model *model_y) {
     this->model_x = model_x;
     this->model_y = model_y;
 }
@@ -16,8 +17,8 @@ double Agent::get_normal_dist(double x, double std) {
 }
 
 Point Agent::get_position(double t) {
-    double x = this->model_x.call(t);
-    double y = this->model_y.call(t);
+    double x = this->model_x->call(t);
+    double y = this->model_y->call(t);
     Point p(x, y);
     return p;
 }
@@ -40,6 +41,13 @@ double Agent::get_prob(double x, double y, double t_0, double t_m) {
     }
 
     return prob_sum / num_samples;
+}
+
+std::string Agent::json() {
+    std::stringstream buffer;
+    buffer << "{\"x\":" << this->model_x->json() <<
+        ",\"y\":" << this->model_y->json() << "}";
+    return buffer.str();
 }
 
 double Agent::get_probability(double x, double y, double t_0, double t_m,

@@ -60,7 +60,7 @@ std::string Path::json() {
             ++iterator) {
         buffer << (*iterator).json();
         if (i++ < st_list.size() - 1) {
-            buffer << ",\n";
+            buffer << ",";
         }
     }
 
