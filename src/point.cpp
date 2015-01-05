@@ -1,7 +1,7 @@
 
 #include <math.h>
-#include <stdlib.h>
 #include <sstream>
+#include <iomanip>
 #include "util.hpp"
 #include "point.hpp"
 
@@ -9,10 +9,6 @@ Point::Point(double x, double y) {
     this->x = x;
     this->y = y;
     this->z = 0;
-
-    std::stringstream buffer;
-    buffer << x << " " << y << " " << z;
-    this->str_rep = buffer.str();
 }
 
 Point::Point(double x, double y, double z) {
@@ -66,7 +62,12 @@ Point Point::to_unit_vector() {
 }
 
 std::string Point::str() {
-    return this->str_rep;
+    int precision = 4;
+    std::stringstream buffer;
+    buffer << std::setprecision(precision) << this->x
+        << " " << std::setprecision(precision) << this->y
+        << " " << std::setprecision(precision) << this->z;
+    return buffer.str();
 }
 
 bool Point::operator==(Point rhs) {

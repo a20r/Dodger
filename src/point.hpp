@@ -26,7 +26,6 @@ class Point {
         double x;
         double y;
         double z;
-        std::string str_rep;
 
 };
 

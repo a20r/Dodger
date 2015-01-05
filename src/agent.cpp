@@ -1,11 +1,12 @@
 
+#include <iostream>
 #include <math.h>
 #include "point.hpp"
 #include "agent.hpp"
 
 Agent::Agent(Model model_x, Model model_y) {
-    this->model_x;
-    this->model_y;
+    this->model_x = model_x;
+    this->model_y = model_y;
 }
 
 double Agent::get_normal_dist(double x, double std) {
@@ -44,4 +45,13 @@ double Agent::get_prob(double x, double y, double t_0, double t_m) {
 double Agent::get_probability(double x, double y, double t_0, double t_m,
         std::list<Agent> agents) {
 
+    double prob_sum = 0.0;
+    Agent current;
+    std::list<Agent>::const_iterator iterator;
+    for (iterator = agents.begin(); iterator != agents.end(); ++iterator) {
+        current = *iterator;
+        prob_sum += current.get_prob(x, y, t_0, t_m);
+    }
+
+    return prob_sum / agents.size();
 }

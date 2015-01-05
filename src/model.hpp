@@ -7,7 +7,7 @@ class Model {
     public:
         Model() {};
         ~Model() {};
-        double call(double t) {
+        virtual double call(double t) {
             return t;
         };
 

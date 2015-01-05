@@ -14,6 +14,9 @@ class STPoint : public Point {
         double get_t() const;
         void set_t(double t);
         double st_dist(STPoint *other_point);
+        Point to_point();
+        std::string str();
+        std::string json();
 
     protected:
         double t;
@@ -25,9 +28,9 @@ class STPointWeight {
     public:
         STPointWeight() {};
         STPointWeight(STPoint val, double weight);
-        STPoint get_val();
-        double get_weight();
-        bool operator<(STPointWeight& right);
+        STPoint get_val() const;
+        double get_weight() const;
+        bool operator<(const STPointWeight& right) const;
 
     private:
         STPoint val;

@@ -1,4 +1,6 @@
 
+#include <iostream>
+#include <sstream>
 #include <iterator>
 #include "stpoint.hpp"
 #include "path.hpp"
@@ -42,6 +44,30 @@ Point Path::get_position(double t) {
 
         i++;
     }
+}
 
+std::list<STPoint> Path::get_list() {
+    return this->st_list;
+}
+
+std::string Path::json() {
+    std::list<STPoint>::iterator iterator;
+
+    std::stringstream buffer;
+    buffer << "[";
+    int i = 0;
+    for (iterator = this->st_list.begin(); iterator != this->st_list.end();
+            ++iterator) {
+        buffer << (*iterator).json();
+        if (i++ < st_list.size() - 1) {
+            buffer << ",\n";
+        }
+    }
+
+    buffer << "]";
+    return buffer.str();
+}
+
+void Path::write_json(std::string filename) {
 
 }

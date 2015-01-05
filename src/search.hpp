@@ -25,7 +25,7 @@ class Search {
         std::list<STPoint> get_st_neighbours(STPoint node);
         Path get_path(Point s_pt, Point e_pt, std::list<Agent> agents);
         Path backtrack_path(std::map<std::string, std::string> parents,
-                std::string goal);
+                STPoint goal, std::map<std::string, STPoint> decoder);
 
     private:
         Roadmap rm;
