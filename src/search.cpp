@@ -80,8 +80,10 @@ Path Search::get_path(Point s_pt, Point e_pt, std::list<Agent> agents) {
         open_set.pop();
         decoder[current.get_val().str()] = current.get_val();
         if (current.get_val().euclid_dist(e_pt) < GOAL_RADIUS) {
-            return this->backtrack_path(parents, current.get_val(),
+            std::list<STPoint> path = this->backtrack_path(parents,
+                    current.get_val(),
                     decoder);
+            return Path(path, -current.get_weight());
         }
 
         neighbours = this->get_st_neighbours(current.get_val());
@@ -116,7 +118,7 @@ Path Search::get_path(Point s_pt, Point e_pt, std::list<Agent> agents) {
     }
 }
 
-Path Search::backtrack_path(
+std::list<STPoint> Search::backtrack_path(
         std::tr1::unordered_map<std::string, std::string> parents,
         STPoint goal, std::tr1::unordered_map<std::string, STPoint> decoder) {
 
@@ -128,8 +130,7 @@ Path Search::backtrack_path(
     while (true) {
         path_list.push_front(current);
         if (parents.count(current.str()) == 0) {
-            Path p(path_list);
-            return p;
+            return path_list;
         } else {
             current = decoder[parents[current.str()]];
         }
@@ -151,8 +152,8 @@ std::string Search::json(Path path, std::list<Agent> agents) {
     }
 
     buffer << "],";
-
-    buffer << "\"path\":" << path.json() << "}";
+    buffer << "\"path_cost\": " << path.get_cost() << ",";
+    buffer << "\"path\": " << path.json() << "}";
     return buffer.str();
 
 }

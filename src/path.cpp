@@ -5,12 +5,9 @@
 #include "stpoint.hpp"
 #include "path.hpp"
 
-Path::Path(std::list<STPoint> st_list) {
+Path::Path(std::list<STPoint> st_list, double cost) {
     this->st_list = st_list;
-}
-
-Path::~Path() {
-
+    this->cost = cost;
 }
 
 double Path::get_max_time() {
@@ -48,6 +45,10 @@ Point Path::get_position(double t) {
 
 std::list<STPoint> Path::get_list() {
     return this->st_list;
+}
+
+double Path::get_cost() {
+    return this->cost;
 }
 
 std::string Path::json() {
