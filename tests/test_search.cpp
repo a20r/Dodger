@@ -18,31 +18,31 @@ int main() {
 
     double speed = 2;
     double wait_time = 0.1;
-    std::list<Agent> agents;
+    std::list<Dodger::Agent> agents;
 
-    Agent ag(
-        new SinModel(2, 1, 1, 2),
-        new LinearModel(0, 1));
+    Dodger::Agent ag(
+        new Dodger::SinModel(2, 1, 1, 2),
+        new Dodger::LinearModel(0, 1));
 
-    Agent ag2(
-        new SinModel(-2, 2, 1, 2),
-        new LinearModel(0, 1.3));
+    Dodger::Agent ag2(
+        new Dodger::SinModel(-2, 2, 1, 2),
+        new Dodger::LinearModel(0, 1.3));
 
-    Agent ag3(
-        new SinModel(2, 2.5, 1, 2),
-        new LinearModel(0, 1.8));
+    Dodger::Agent ag3(
+        new Dodger::SinModel(2, 2.5, 1, 2),
+        new Dodger::LinearModel(0, 1.8));
 
-    Agent ag4(
-        new SinModel(-2, 3, 1, 2),
-        new LinearModel(0, 2.1));
+    Dodger::Agent ag4(
+        new Dodger::SinModel(-2, 3, 1, 2),
+        new Dodger::LinearModel(0, 2.1));
 
-    Agent ag5(
-        new SinModel(2, 5, 1, 2),
-        new LinearModel(0, 2.5));
+    Dodger::Agent ag5(
+        new Dodger::SinModel(2, 5, 1, 2),
+        new Dodger::LinearModel(0, 2.5));
 
-    Agent ag6(
-        new SinModel(-2, 4, 1, 2),
-        new LinearModel(0, 3));
+    Dodger::Agent ag6(
+        new Dodger::SinModel(-2, 4, 1, 2),
+        new Dodger::LinearModel(0, 3));
 
 
     agents.push_back(ag);
@@ -52,13 +52,13 @@ int main() {
     agents.push_back(ag5);
     agents.push_back(ag6);
 
-    Point start(2, 0);
-    Point goal(2, 4);
-    RoadmapGenerator rmgr(4, 4, start, 0.3);
-    Roadmap rm = rmgr.generate(1000);
+    Dodger::Point start(2, 0);
+    Dodger::Point goal(2, 4);
+    Dodger::RoadmapGenerator rmgr(4, 4, start, 0.3);
+    Dodger::Roadmap rm = rmgr.generate(1000);
 
-    Search search(rm, speed, wait_time);
-    Path path = search.get_path(start, goal, agents);
-    std::cout << Search::json(path, agents) << std::endl;
+    Dodger::Search search(rm, speed, wait_time);
+    Dodger::Path path = search.get_path(start, goal, agents);
+    std::cout << Dodger::Search::json(path, agents) << std::endl;
 
 }

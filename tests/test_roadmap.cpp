@@ -7,9 +7,9 @@
 
 int main() {
 
-    Point start(2, 0);
-    RoadmapGenerator rmgr(5, 5, start, 0.3);
-    Roadmap rm = rmgr.generate(500);
+    Dodger::Point start(2, 0);
+    Dodger::RoadmapGenerator rmgr(5, 5, start, 0.3);
+    Dodger::Roadmap rm = rmgr.generate(500);
 
     std::set<std::string>::iterator iterator;
     std::set<std::string> nodes = rm.get_nodes();

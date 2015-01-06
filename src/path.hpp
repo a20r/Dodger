@@ -5,22 +5,24 @@
 #include <list>
 #include "stpoint.hpp"
 
-class Path {
+namespace Dodger {
 
-    public:
-        Path() {};
-        Path(std::list<STPoint> st_list, double cost);
-        ~Path() {};
-        double get_max_time();
-        double get_cost();
-        Point get_position(double t);
-        std::list<STPoint> get_list();
-        std::string json();
-        void write_json(std::string filename);
+    class Path {
 
-    private:
-        std::list<STPoint> st_list;
-        double cost;
-};
+        public:
+            Path() {};
+            Path(std::list<STPoint> st_list, double cost);
+            ~Path() {};
+            double get_max_time();
+            double get_cost();
+            Point get_position(double t);
+            std::list<STPoint> get_list();
+            std::string json();
+            void write_json(std::string filename);
 
+        private:
+            std::list<STPoint> st_list;
+            double cost;
+    };
+}
 #endif
