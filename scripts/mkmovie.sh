@@ -1,7 +1,5 @@
-rm -rf $2
 mkdir $2
-cmake .
-make
+rm $2*.png
 
 echo Running search
 bin/test_search > $1

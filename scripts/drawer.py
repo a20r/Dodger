@@ -80,9 +80,9 @@ class Drawer(object):
         return self
 
     def show(self):
-        self.ax.set_xlabel("X [meters]")
-        self.ax.set_ylabel("Y [meters]")
-        self.ax.set_zlabel("Time [seconds]")
+        self.ax.set_xlabel("X")
+        self.ax.set_ylabel("Y")
+        self.ax.set_zlabel("Time")
         plt.show()
         return self
 
