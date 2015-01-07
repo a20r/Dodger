@@ -21,7 +21,7 @@ int main() {
     std::list<Dodger::Agent> agents;
 
     Dodger::Agent ag(
-        new Dodger::SinModel(2, 1, 1, 2),
+        new Dodger::SinModel(2, 3, 1, 2),
         new Dodger::LinearModel(0, 1));
 
     Dodger::Agent ag2(
@@ -37,11 +37,11 @@ int main() {
         new Dodger::LinearModel(0, 2.1));
 
     Dodger::Agent ag5(
-        new Dodger::SinModel(2, 5, 1, 2),
+        new Dodger::SinModel(2, 4, 1, 2),
         new Dodger::LinearModel(0, 2.5));
 
     Dodger::Agent ag6(
-        new Dodger::SinModel(-2, 4, 1, 2),
+        new Dodger::SinModel(-2, 5, 1, 2),
         new Dodger::LinearModel(0, 3));
 
 

@@ -1,5 +1,4 @@
 
-#include "point.hpp"
 #include "grid.hpp"
 
 namespace Dodger {

@@ -60,7 +60,7 @@ class Drawer(object):
         for i, s_n in enumerate(path[:-1]):
             e_n = path[i + 1]
             self.ax.plot([s_n.x, e_n.x], [s_n.y, e_n.y], [s_n.t, e_n.t],
-                         "r", linewidth=2)
+                         "ro:", linewidth=2)
         return self
 
     def draw_agent(self, ag, t_m):
@@ -76,7 +76,7 @@ class Drawer(object):
             ys.append(ag_pt.y)
             ts.append(t)
 
-        self.ax.plot(xs, ys, ts, "y", linewidth=2)
+        self.ax.plot(xs, ys, ts, "y-", linewidth=2)
         return self
 
     def show(self):
