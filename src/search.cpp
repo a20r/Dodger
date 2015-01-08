@@ -73,7 +73,6 @@ namespace Dodger {
         STPointWeight current;
         Point nr_pt;
         double nr_cost, r_cost, total_cost;
-        int i = 0;
 
         while (!open_set.empty()) {
             current = open_set.top();
