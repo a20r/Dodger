@@ -16,31 +16,31 @@ int main() {
 
     srand(time(NULL));
 
-    double speed = 2;
+    double speed = 2.5;
     double wait_time = 0.1;
-    std::list<Dodger::Agent> agents;
+    std::list<Dodger::Agent *> agents;
 
-    Dodger::Agent ag(
+    Dodger::Agent *ag = new Dodger::Agent(
         new Dodger::SinModel(2, 3, 1, 2),
         new Dodger::LinearModel(0, 1));
 
-    Dodger::Agent ag2(
+    Dodger::Agent *ag2 = new Dodger::Agent(
         new Dodger::SinModel(-2, 2, 1, 2),
         new Dodger::LinearModel(0, 1.3));
 
-    Dodger::Agent ag3(
+    Dodger::Agent *ag3 = new Dodger::Agent(
         new Dodger::SinModel(2, 2.5, 1, 2),
         new Dodger::LinearModel(0, 1.8));
 
-    Dodger::Agent ag4(
+    Dodger::Agent *ag4 = new Dodger::Agent(
         new Dodger::SinModel(-2, 3, 1, 2),
         new Dodger::LinearModel(0, 2.1));
 
-    Dodger::Agent ag5(
+    Dodger::Agent *ag5 = new Dodger::Agent(
         new Dodger::SinModel(2, 4, 1, 2),
         new Dodger::LinearModel(0, 2.5));
 
-    Dodger::Agent ag6(
+    Dodger::Agent *ag6 = new Dodger::Agent(
         new Dodger::SinModel(-2, 5, 1, 2),
         new Dodger::LinearModel(0, 3));
 

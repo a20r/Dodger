@@ -22,12 +22,27 @@ namespace Dodger {
             double get_prob(double x, double y, double t_0, double t_m);
             std::string json();
             static double get_probability(double x, double y, double t_0,
-                    double t_m, std::list<Agent> agents);
+                    double t_m, std::list<Agent *> agents);
 
-        private:
+        protected:
             Model *model_x;
             Model *model_y;
 
+    };
+
+    class StochasticAgent : public Agent {
+
+        public:
+            StochasticAgent() {};
+            StochasticAgent(Point start, Model *model_x, Model *model_y);
+            ~StochasticAgent() {};
+            Point get_position(double t);
+            double get_prob(double x, double y, double t_0, double t_m);
+            std::string json();
+
+        protected:
+            Model *model_x;
+            Model *model_y;
     };
 
 }

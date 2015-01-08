@@ -12,7 +12,7 @@ namespace Dodger {
         this->wait_time = wait_time;
     }
 
-    double Search::get_cost(STPoint n1, STPoint n2, std::list<Agent> agents) {
+    double Search::get_cost(STPoint n1, STPoint n2, std::list<Agent *> agents) {
 
         double max_cost = 0;
         double x_slope = (n2.get_x() - n1.get_x()) / NUM_EDGE_SAMPLES;
@@ -56,7 +56,7 @@ namespace Dodger {
         return st_neighbours;
     }
 
-    Path Search::get_path(Point s_pt, Point e_pt, std::list<Agent> agents) {
+    Path Search::get_path(Point s_pt, Point e_pt, std::list<Agent *> agents) {
 
         this->rm.insert(s_pt);
         this->rm.insert(e_pt);
@@ -129,15 +129,15 @@ namespace Dodger {
         }
     }
 
-    std::string Search::json(Path path, std::list<Agent> agents) {
+    std::string Search::json(Path path, std::list<Agent*> agents) {
 
-        std::list<Agent>::iterator iterator;
+        std::list<Agent *>::iterator iterator;
         std::stringstream buffer;
         buffer << "{\"agents\": [";
         int i = 0;
         for (iterator = agents.begin(); iterator != agents.end();
                 ++iterator) {
-            buffer << (*iterator).json();
+            buffer << (*iterator)->json();
             if (i++ < agents.size() - 1) {
                 buffer << ",";
             }

@@ -53,16 +53,18 @@ namespace Dodger {
     }
 
     double Agent::get_probability(double x, double y, double t_0, double t_m,
-            std::list<Agent> agents) {
+            std::list<Agent *> agents) {
 
         double prob_sum = 0.0;
-        Agent current;
-        std::list<Agent>::const_iterator iterator;
+        std::list<Agent *>::iterator iterator;
         for (iterator = agents.begin(); iterator != agents.end(); ++iterator) {
-            current = *iterator;
-            prob_sum += current.get_prob(x, y, t_0, t_m);
+            prob_sum += (*iterator)->get_prob(x, y, t_0, t_m);
         }
 
         return prob_sum / agents.size();
+    }
+
+    StochasticAgent::StochasticAgent(Model *model_x, Model *model_y,
+            Point start) {
     }
 }
