@@ -9,16 +9,25 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 include_directories(src)
 aux_source_directory(src SRC)
 
+# static library
 add_library(dodger STATIC ${SRC})
 
+# tests
 add_executable(test_point tests/test_point.cpp)
 add_executable(test_st_point tests/test_st_point.cpp)
 add_executable(test_grid tests/test_grid.cpp)
 add_executable(test_roadmap tests/test_roadmap.cpp)
 add_executable(test_search tests/test_search.cpp)
 
+# examples
+add_executable(frogger examples/frogger.cpp)
+add_executable(pendulum examples/pendulum.cpp)
+
+# linking libdodger
 target_link_libraries(test_point dodger)
 target_link_libraries(test_st_point dodger)
 target_link_libraries(test_grid dodger)
 target_link_libraries(test_roadmap dodger)
 target_link_libraries(test_search dodger)
+target_link_libraries(frogger dodger)
+target_link_libraries(pendulum dodger)

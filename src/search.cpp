@@ -65,12 +65,10 @@ namespace Dodger {
         std::tr1::unordered_map<std::string, int> num_visited;
         std::tr1::unordered_map<std::string, STPoint> decoder;
         std::tr1::unordered_map<std::string, std::string> parents;
-        std::tr1::unordered_map<std::string, double> max_costs;
         std::priority_queue<STPointWeight> open_set;
         STPoint first(s_pt.get_x(), s_pt.get_y(), 0);
         STPointWeight first_weight(first, 0);
 
-        max_costs[first.str()] = 0;
         open_set.push(first_weight);
         STPointWeight current;
         Point nr_pt;
@@ -83,8 +81,7 @@ namespace Dodger {
             decoder[current.get_val().str()] = current.get_val();
             if (current.get_val().euclid_dist(e_pt) < GOAL_RADIUS) {
                 std::list<STPoint> path = this->backtrack_path(parents,
-                        current.get_val(),
-                        decoder);
+                        current.get_val(), decoder);
                 return Path(path, -current.get_weight());
             }
 
@@ -96,14 +93,8 @@ namespace Dodger {
                 parents[(*iterator).str()] = current.get_val().str();
                 nr_pt = (*iterator).to_point();
 
-                nr_cost = COST_SCALE * this->get_cost(current.get_val(), *iterator,
-                        agents);
-
-                if (nr_cost < max_costs[current.get_val().str()]) {
-                    nr_cost = max_costs[current.get_val().str()];
-                }
-
-                max_costs[(*iterator).str()] = nr_cost;
+                nr_cost = COST_SCALE * this->get_cost(current.get_val(),
+                        *iterator, agents);
 
                 if (num_visited.count(nr_pt.str()) > 0) {
                     r_cost = REPEAT_COST_SCALE * num_visited[nr_pt.str()];

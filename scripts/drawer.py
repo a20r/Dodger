@@ -64,7 +64,7 @@ class Drawer(object):
         return self
 
     def draw_agent(self, ag, t_m):
-        num_samples = 20
+        num_samples = int(t_m * 10)
         t_step = t_m / num_samples
         xs = list()
         ys = list()

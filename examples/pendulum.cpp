@@ -16,33 +16,37 @@ int main() {
 
     srand(time(NULL));
 
-    double speed = 2;
+    double speed = 3;
     double wait_time = 0.1;
     std::list<Dodger::Agent> agents;
 
     Dodger::Agent ag(
-        new Dodger::SinModel(2, 3, 1, 2),
-        new Dodger::LinearModel(0, 1));
+        new Dodger::LinearModel(0, 1),
+        new Dodger::SinModel(-2, 4, 0, 2));
 
     Dodger::Agent ag2(
-        new Dodger::SinModel(-2, 2, 1, 2),
-        new Dodger::LinearModel(0, 1.3));
+        new Dodger::LinearModel(0, 3),
+        new Dodger::SinModel(-2, 4, 0, 2));
 
     Dodger::Agent ag3(
-        new Dodger::SinModel(2, 2.5, 1, 2),
-        new Dodger::LinearModel(0, 1.8));
+        new Dodger::LinearModel(0, 0),
+        new Dodger::SinModel(2, 4, 0, 2));
 
     Dodger::Agent ag4(
-        new Dodger::SinModel(-2, 3, 1, 2),
-        new Dodger::LinearModel(0, 2.1));
+        new Dodger::LinearModel(0, 4),
+        new Dodger::SinModel(2, 4, 0, 2));
 
     Dodger::Agent ag5(
-        new Dodger::SinModel(2, 4, 1, 2),
-        new Dodger::LinearModel(0, 2.5));
+        new Dodger::SinModel(2, 5, 0, 2),
+        new Dodger::LinearModel(0, 3));
 
     Dodger::Agent ag6(
-        new Dodger::SinModel(-2, 5, 1, 2),
-        new Dodger::LinearModel(0, 3));
+        new Dodger::SinModel(-2, 5, 0, 2),
+        new Dodger::LinearModel(0, 2));
+
+    Dodger::Agent ag7(
+        new Dodger::SinModel(2, 5, 0, 2),
+        new Dodger::LinearModel(0, 1));
 
     agents.push_back(ag);
     agents.push_back(ag2);
@@ -50,6 +54,7 @@ int main() {
     agents.push_back(ag4);
     agents.push_back(ag5);
     agents.push_back(ag6);
+    agents.push_back(ag7);
 
     Dodger::Point start(2, 0);
     Dodger::Point goal(2, 4);
