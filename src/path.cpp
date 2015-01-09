@@ -12,6 +12,11 @@ namespace Dodger {
         this->cost = cost;
     }
 
+    Path::Path(std::list<STPoint> st_list) {
+        this->st_list = st_list;
+        this->cost = 0;
+    }
+
     double Path::get_max_time() {
         return this->st_list.back().get_t();
     }

@@ -3,6 +3,7 @@
 #include <sstream>
 #include <math.h>
 #include "point.hpp"
+#include "stpoint.hpp"
 #include "agent.hpp"
 
 namespace Dodger {
@@ -66,5 +67,38 @@ namespace Dodger {
 
     StochasticAgent::StochasticAgent(Model *model_x, Model *model_y,
             Point start) {
+        this->model_x = model_x;
+        this->model_y = model_y;
+        this->start = start;
+        this->path = this->generate_path(MAX_TIME);
+    }
+
+    Path StochasticAgent::generate_path(double max_time) {
+        double last_x = this->start.get_x();
+        double last_y = this->start.get_y();
+        double x, y, t;
+        std::list<STPoint> path;
+        std::default_random_engine generator;
+        std::normal_distribution<double> distribution(0, RAND_STD);
+
+        path.push_back(STPoint(last_x, last_y, 0));
+        t = T_STEP;
+
+        while (t < max_time) {
+            x = last_x + this->model_x->call(t) * T_STEP;
+            y = last_y + this->model_y->call(t) * T_STEP;
+            path.push_back(STPoint(x, y, t));
+            t += T_STEP;
+        }
+
+        return Path(path);
+    }
+
+    Point StochasticAgent::get_position(double t) {
+        return this->path.get_position(t);
+    }
+
+    std::string StochasticAgent::json() {
+        return this->path.json();
     }
 }
