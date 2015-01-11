@@ -12,6 +12,7 @@ namespace Dodger {
         public:
             Path() {};
             Path(std::list<STPoint> st_list, double cost);
+            Path(std::list<STPoint> st_list);
             ~Path() {};
             double get_max_time();
             double get_cost();

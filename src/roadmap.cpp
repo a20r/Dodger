@@ -16,7 +16,8 @@ namespace Dodger {
         this->gd.insert(sample);
         std::list<Point> closest = this->gd.get_nearest(sample);
         std::list<Point>::const_iterator iterator;
-        for (iterator = closest.begin(); iterator != closest.end(); ++iterator) {
+        for (iterator = closest.begin(); iterator != closest.end();
+                ++iterator) {
             if (sample == *iterator) {
                 continue;
             }
