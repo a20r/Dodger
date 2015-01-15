@@ -73,8 +73,11 @@ namespace Dodger {
         STPointWeight current;
         Point nr_pt;
         double nr_cost, r_cost, total_cost;
+        int num_iters = 0;
 
         while (!open_set.empty()) {
+            num_iters++;
+
             current = open_set.top();
             open_set.pop();
             decoder[current.get_val().str()] = current.get_val();
@@ -108,6 +111,7 @@ namespace Dodger {
                 open_set.push(pw);
             }
         }
+
     }
 
     std::list<STPoint> Search::backtrack_path(
