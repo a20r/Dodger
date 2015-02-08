@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (Dodger)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Ofast -march=native -flto -fwhole-program")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Ofast -march=native -flto -fwhole-program -g")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -22,6 +22,7 @@ add_executable(test_search tests/test_search.cpp)
 # examples
 add_executable(frogger examples/frogger.cpp)
 add_executable(pendulum examples/pendulum.cpp)
+add_executable(stochastic examples/stochastic.cpp)
 
 # linking libdodger
 target_link_libraries(test_point dodger)
@@ -31,3 +32,4 @@ target_link_libraries(test_roadmap dodger)
 target_link_libraries(test_search dodger)
 target_link_libraries(frogger dodger)
 target_link_libraries(pendulum dodger)
+target_link_libraries(stochastic dodger)

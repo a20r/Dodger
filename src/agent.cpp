@@ -71,6 +71,9 @@ namespace Dodger {
         this->model_y = model_y;
         this->start = start;
         this->path = this->generate_path(MAX_TIME);
+        this->current_x = start.get_x();
+        this->current_y = start.get_y();
+        this->current_t = 0;
     }
 
     Path StochasticAgent::generate_path(double max_time) {
@@ -95,6 +98,7 @@ namespace Dodger {
     }
 
     Point StochasticAgent::get_position(double t) {
+        // this should be based on the input functions without noise
         return this->path.get_position(t);
     }
 
