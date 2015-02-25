@@ -4,13 +4,13 @@
 
 #include <list>
 #include <cmath>
-#include <random>
 #include "path.hpp"
 #include "model.hpp"
 
 #define DELTA_T 0.01
 #define STD_SCALE 1.0
 #define WEIGHT_SCALE 1.5
+#define STD_0 0.2
 
 #define T_STEP 0.1 // used for the path generation
 #define RAND_STD 0.1
@@ -22,6 +22,7 @@ namespace Dodger {
 
         public:
             Agent() {};
+            Agent(Model *model_x, Model *model_y, double noise);
             Agent(Model *model_x, Model *model_y);
             ~Agent() {};
             double get_normal_dist(double x, double std);
@@ -32,6 +33,7 @@ namespace Dodger {
                     double t_m, std::list<Agent *> agents);
 
         protected:
+            double noise;
             Model *model_x;
             Model *model_y;
 

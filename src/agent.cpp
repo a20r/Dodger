@@ -2,15 +2,23 @@
 #include <iostream>
 #include <sstream>
 #include <math.h>
+#include <random>
 #include "point.hpp"
 #include "stpoint.hpp"
 #include "agent.hpp"
 
 namespace Dodger {
 
+    Agent::Agent(Model *model_x, Model *model_y, double noise) {
+        this->model_x = model_x;
+        this->model_y = model_y;
+        this->noise = noise;
+    }
+
     Agent::Agent(Model *model_x, Model *model_y) {
         this->model_x = model_x;
         this->model_y = model_y;
+        this->noise = 0.0;
     }
 
     double Agent::get_normal_dist(double x, double std) {
@@ -19,6 +27,7 @@ namespace Dodger {
         return coeff * pow_val;
     }
 
+    // use table here for randomization
     Point Agent::get_position(double t) {
         double x = this->model_x->call(t);
         double y = this->model_y->call(t);
@@ -38,7 +47,7 @@ namespace Dodger {
             num_samples++;
             pos = this->get_position(t);
             dist = pos.euclid_dist(current);
-            prob = this->get_normal_dist(dist, STD_SCALE * (t - t_0) + 0.1);
+            prob = this->get_normal_dist(dist, STD_SCALE * (t - t_0) + STD_0);
             prob_sum += pow(t_m - t + 1, WEIGHT_SCALE) * prob;
             t += DELTA_T;
         }
@@ -58,8 +67,8 @@ namespace Dodger {
 
         double prob_sum = 0.0;
         std::list<Agent *>::iterator iterator;
-        for (iterator = agents.begin(); iterator != agents.end(); ++iterator) {
-            prob_sum += (*iterator)->get_prob(x, y, t_0, t_m);
+        for (Agent *ag : agents) {
+            prob_sum += ag->get_prob(x, y, t_0, t_m);
         }
 
         return prob_sum / agents.size();
