@@ -73,11 +73,8 @@ namespace Dodger {
         STPointWeight current;
         Point nr_pt;
         double nr_cost, r_cost, total_cost;
-        int num_iters = 0;
 
         while (!open_set.empty()) {
-            num_iters++;
-
             current = open_set.top();
             open_set.pop();
             decoder[current.get_val().str()] = current.get_val();
@@ -107,8 +104,12 @@ namespace Dodger {
                 }
 
                 total_cost = nr_cost + r_cost;
-                STPointWeight pw(*iterator, -total_cost);
-                open_set.push(pw);
+
+                if (-current.get_weight() > total_cost) {
+                    open_set.push(STPointWeight(*iterator, current.get_weight()));
+                } else {
+                    open_set.push(STPointWeight(*iterator, -total_cost));
+                }
             }
         }
 
