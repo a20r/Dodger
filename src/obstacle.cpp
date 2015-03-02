@@ -1,6 +1,5 @@
 
 #include <fstream>
-#include "rapidjson/document.h"
 #include "obstacle.hpp"
 
 namespace Dodger {
@@ -64,17 +63,6 @@ namespace Dodger {
         }
 
         return (rcross & 1);
-    }
-
-    // This does not work. I wish it did though.
-    vector<Obstacle> Obstacle::load_obstacles(string filename) {
-        ifstream file(filename.c_str());
-        string str;
-        string file_contents;
-        while (std::getline(file, str)) {
-            file_contents += str;
-            file_contents.push_back('\n');
-        }
     }
 
     bool Obstacle::in(Point p_start, Point p_end) {
