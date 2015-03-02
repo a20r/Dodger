@@ -64,17 +64,11 @@ namespace Dodger {
         return (rcross & 1);
     }
 
-    bool Obstacle::in(Point p_start, Point p_end) {
-        return false;
-    }
-
     bool Obstacle::in_any(Point p, list<Obstacle> obs) {
         for (Obstacle ob : obs) {
             if (ob.in(p)) {
                 return true;
             }
         }
-
-        return false;
     }
 }
