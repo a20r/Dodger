@@ -27,8 +27,7 @@ namespace Dodger {
         bool testr;
         bool testl;
 
-        for(i = 0; i < n; i++)
-        {
+        for(i = 0; i < n; i++) {
             if (strange_index(2 * i) == px && strange_index(2 * i + 1) == py) {
                 return true;
             }
