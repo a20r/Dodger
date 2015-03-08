@@ -1,9 +1,9 @@
 
 #include <iostream>
-#include <iterator>
 #include <list>
 #include <stdlib.h>
 #include <time.h>
+#include <vector>
 #include "point.hpp"
 #include "roadmap.hpp"
 #include "rmgenerator.hpp"
@@ -16,7 +16,7 @@ int main() {
 
     srand(time(NULL));
 
-    double speed = 2.5;
+    double speed = 2;
     double wait_time = 0.1;
     std::list<Dodger::Agent *> agents;
 
@@ -51,9 +51,19 @@ int main() {
     agents.push_back(ag5);
     agents.push_back(ag6);
 
+
+    std::vector<Dodger::Point> pts;
+    pts.push_back(Dodger::Point(1, 1));
+    pts.push_back(Dodger::Point(3, 1));
+    pts.push_back(Dodger::Point(3, 2));
+    pts.push_back(Dodger::Point(1, 2));
+    Dodger::Obstacle ob(pts);
+    std::list<Dodger::Obstacle> obs;
+    obs.push_back(ob);
+
     Dodger::Point start(2, 0);
     Dodger::Point goal(2, 4);
-    Dodger::RoadmapGenerator rmgr(4, 4, start, 0.3);
+    Dodger::RoadmapGenerator rmgr(4, 4, start, 0.3, obs);
     Dodger::Roadmap rm = rmgr.generate(1000);
 
     Dodger::Search search(rm, speed, wait_time);

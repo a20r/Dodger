@@ -11,7 +11,7 @@
 #include "point.hpp"
 #include "path.hpp"
 
-#define REPEAT_COST_SCALE 0.1
+#define REPEAT_COST_SCALE 1
 #define NUM_EDGE_SAMPLES 10
 #define COST_SCALE 10
 #define GOAL_RADIUS 0.3
