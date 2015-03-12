@@ -14,6 +14,8 @@ class Path(list):
 
             if t <= p.get_t():
                 t_diff = p.t - self[i - 1].t
+                if t_diff == 0:
+                    continue
                 rel_t = float(t) - self[i - 1].t
                 x_vel = (p.x - self[i - 1].x) / t_diff
                 y_vel = (p.y - self[i - 1].y) / t_diff

@@ -23,6 +23,7 @@ add_executable(test_search tests/test_search.cpp)
 add_executable(frogger examples/frogger.cpp)
 add_executable(pendulum examples/pendulum.cpp)
 add_executable(stochastic examples/stochastic.cpp)
+add_executable(replanner examples/replanner.cpp)
 
 # linking libdodger
 target_link_libraries(test_point dodger)
@@ -33,3 +34,4 @@ target_link_libraries(test_search dodger)
 target_link_libraries(frogger dodger)
 target_link_libraries(pendulum dodger)
 target_link_libraries(stochastic dodger)
+target_link_libraries(replanner dodger)

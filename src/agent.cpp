@@ -2,7 +2,6 @@
 #include <iostream>
 #include <sstream>
 #include <math.h>
-#include <random>
 #include "point.hpp"
 #include "stpoint.hpp"
 #include "agent.hpp"
@@ -27,12 +26,18 @@ namespace Dodger {
         return coeff * pow_val;
     }
 
-    // use table here for randomization
     Point Agent::get_position(double t) {
         double x = this->model_x->call(t);
         double y = this->model_y->call(t);
-        Point p(x, y);
-        return p;
+        return Point(x, y);
+    }
+
+    void Agent::step(double t) {}
+
+    void Agent::update_starting_positions() {}
+
+    double Agent::get_difference(double t) {
+        return 0;
     }
 
     double Agent::get_prob(double x, double y, double t_0, double t_m) {
@@ -75,43 +80,49 @@ namespace Dodger {
     }
 
     StochasticAgent::StochasticAgent(Model *model_x, Model *model_y,
-            Point start) {
+            Point start, double noise_std) {
         this->model_x = model_x;
         this->model_y = model_y;
         this->start = start;
-        this->path = this->generate_path(MAX_TIME);
         this->current_x = start.get_x();
         this->current_y = start.get_y();
+        this->holder_x = start.get_x();
+        this->holder_y = start.get_y();
         this->current_t = 0;
+        this->distribution = normal_distribution<double>(0, noise_std);
     }
 
-    Path StochasticAgent::generate_path(double max_time) {
-        double last_x = this->start.get_x();
-        double last_y = this->start.get_y();
-        double x, y, t;
-        std::list<STPoint> path;
-        std::default_random_engine generator;
-        std::normal_distribution<double> distribution(0, RAND_STD);
+    void StochasticAgent::step(double t) {
+        double dt = t - this->current_t;
+        double rx = this->distribution(this->generator);
+        double ry = this->distribution(this->generator);
+        path_vec.push_back(STPoint(this->current_x, this->current_y,
+                    this->current_t));
+        this->current_x += this->model_x->call(t) * dt + rx;
+        this->current_y += this->model_y->call(t) * dt + ry;
+        this->current_t = t;
+    }
 
-        path.push_back(STPoint(last_x, last_y, 0));
-        t = T_STEP;
+    double StochasticAgent::get_difference(double t) {
+        Point pp = this->get_position(t);
+        return sqrt(pow(current_x - pp.get_x(), 2)
+                + pow(current_y - pp.get_y(), 2));
+    }
 
-        while (t < max_time) {
-            x = last_x + this->model_x->call(t) * T_STEP;
-            y = last_y + this->model_y->call(t) * T_STEP;
-            path.push_back(STPoint(x, y, t));
-            t += T_STEP;
-        }
-
-        return Path(path);
+    void StochasticAgent::update_starting_positions() {
+        this->holder_x = this->current_x;
+        this->holder_y = this->current_y;
     }
 
     Point StochasticAgent::get_position(double t) {
-        // this should be based on the input functions without noise
-        return this->path.get_position(t);
+        // t >= current_t
+        double dt = t - this->current_t;
+        double x = this->holder_x + this->model_x->call(t) * dt;
+        double y = this->holder_y + this->model_y->call(t) * dt;
+        return Point(x, y);
     }
 
     std::string StochasticAgent::json() {
-        return this->path.json();
+        return Path(this->path_vec).json();
     }
 }

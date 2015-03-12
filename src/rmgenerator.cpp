@@ -1,6 +1,7 @@
 
 #include "grid.hpp"
 #include "roadmap.hpp"
+#include <iostream>
 #include "rmgenerator.hpp"
 
 namespace Dodger {

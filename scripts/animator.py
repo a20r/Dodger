@@ -1,5 +1,6 @@
 
 import matplotlib.pyplot as plt
+import path
 import warnings
 
 
@@ -14,7 +15,7 @@ class Animator(object):
         self.ax.set_ylabel("Y")
         self.ax.set_xlim(kwargs.get("x_min", -1), kwargs.get("x_max", 5))
         self.ax.set_ylim(kwargs.get("y_min", -1), kwargs.get("y_max", 5))
-        self.fig_dir = kwargs.get("fig_dir", "sandbox/figs/");
+        self.fig_dir = kwargs.get("fig_dir", "sandbox/figs/")
         self.path = path
         self.agents = agents
         self.agent_plots = [self.ax.scatter([], []) for _ in agents]
@@ -29,7 +30,10 @@ class Animator(object):
             [pln_pos.x], [pln_pos.y], marker="o", color="b", s=40)
 
         for i, ag in enumerate(self.agents):
-            ag_pos = ag.get_position(t)
+            if type(ag) == path.Path:
+                ag_pos = ag(t)
+            else:
+                ag_pos = ag.get_position(t)
             self.agent_plots[i].remove()
             self.agent_plots[i] = self.ax.scatter(
                 [ag_pos.x], [ag_pos.y], marker="^", color="r", s=40)
