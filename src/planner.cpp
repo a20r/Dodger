@@ -21,9 +21,6 @@ namespace Dodger {
         double current_time = 0, diff;
         bool replan = false;
         while (stp_list.back().euclid_dist(goal) > this->goal_radius) {
-            // cerr << "Current time: " << current_time << endl;
-            // cerr << "Current pos: " << current_pt.get_x() << ", ";
-            // cerr << current_pt.get_y() << endl;
 
             Path path = this->search.get_path(current_pt, goal, agents,
                         current_time);
