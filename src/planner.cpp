@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <vector>
+#include <tr1/unordered_map>
 #include "planner.hpp"
 
 namespace Dodger {
@@ -20,12 +21,14 @@ namespace Dodger {
         STPoint next_st;
         double current_time = 0, diff;
         bool replan = false;
+        std::tr1::unordered_map<std::string, int> num_visited;
         while (stp_list.back().euclid_dist(goal) > this->goal_radius) {
 
             Path path = this->search.get_path(current_pt, goal, agents,
-                        current_time);
+                        num_visited, current_time);
 
-            for (STPoint stp : path.get_list()) {
+            for (int i = 0; i < path.get_list().size(); i++) {
+                STPoint stp = path.get(i);
                 stp_list.push_back(stp);
                 replan = false;
                 for (Agent *ag : this->agents) {
@@ -41,9 +44,7 @@ namespace Dodger {
                         ag->update_starting_positions();
                     }
 
-                    current_pt = Point(stp.get_x(), stp.get_y());
                     current_time = stp.get_t();
-
                     break;
                 }
             }

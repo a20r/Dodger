@@ -34,6 +34,18 @@ namespace Dodger {
         return max_cost;
     }
 
+    double Search::get_cost(Path path, list<Agent *> agents) {
+        double ret_cost = 0;
+        for (int i = 1; i < path.get_list().size(); i++) {
+            double cost = this->get_cost(path.get(i - 1), path.get(i), agents);
+            if (cost > ret_cost) {
+                ret_cost = cost;
+            }
+        }
+
+        return ret_cost;
+    }
+
     std::list<STPoint> Search::get_st_neighbours(STPoint node) {
         Point current;
         double dist, t;
@@ -59,17 +71,18 @@ namespace Dodger {
 
 
     Path Search::get_path(Point s_pt, Point e_pt, std::list<Agent *> agents) {
-        return this->get_path(s_pt, e_pt, agents, 0);
+        std::tr1::unordered_map<std::string, int> num_visited;
+        return this->get_path(s_pt, e_pt, agents, num_visited, 0);
     }
 
     Path Search::get_path(Point s_pt, Point e_pt, std::list<Agent *> agents,
+            std::tr1::unordered_map<std::string, int> num_visited,
             double start_time) {
 
         this->rm.insert(s_pt);
         this->rm.insert(e_pt);
 
         std::list<STPoint> neighbours;
-        std::tr1::unordered_map<std::string, int> num_visited;
         std::tr1::unordered_map<std::string, STPoint> decoder;
         std::tr1::unordered_map<std::string, std::string> parents;
         std::priority_queue<STPointWeight> open_set;

@@ -19,7 +19,7 @@ int main() {
 
     double speed = 2.5;
     double wait_time = 0.1;
-    double noise_std = 0.2;
+    double noise_std = 0.05;
     std::list<Dodger::Agent *> agents;
 
     Dodger::StochasticAgent *ag = new Dodger::StochasticAgent(
@@ -31,11 +31,11 @@ int main() {
 
     Dodger::Point start(2, 0);
     Dodger::Point goal(2, 4);
-    Dodger::RoadmapGenerator rmgr(4, 4, start, 0.2);
+    Dodger::RoadmapGenerator rmgr(4, 4, start, 0.3);
 
     Dodger::Roadmap rm = rmgr.generate(1000);
     Dodger::Search search(rm, speed, wait_time);
-    Dodger::Planner planner(search, agents, 0.5, 0.4);
+    Dodger::Planner planner(search, agents, 0.5, 100);
 
     Dodger::Path path = planner.get_path(start, goal);
     cout << Dodger::Search::json(path, agents) << endl;

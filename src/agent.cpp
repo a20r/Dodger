@@ -116,9 +116,15 @@ namespace Dodger {
 
     Point StochasticAgent::get_position(double t) {
         // t >= current_t
-        double dt = t - this->current_t;
-        double x = this->holder_x + this->model_x->call(t) * dt;
-        double y = this->holder_y + this->model_y->call(t) * dt;
+        double x = this->holder_x;
+        double y = this->holder_y;
+        double tc = this->current_t;
+        double dt = 0.1;
+        while (tc < t) {
+            x += this->model_x->call(tc) * dt;
+            y += this->model_y->call(tc) * dt;
+            tc += dt;
+        }
         return Point(x, y);
     }
 
