@@ -12,7 +12,8 @@ import time
 # import math
 
 from visualization_msgs.msg import Marker
-from std_msgs.msg import ColorRGBA
+from nav_msgs.msg import Path
+from geometry_msgs.msg import PoseStamped, Pose
 
 
 duration = 10
@@ -27,6 +28,9 @@ def run():
     rospy.init_node("dodger_animator", anonymous=False)
     pub = rospy.Publisher(
         "visualization_marker", Marker, queue_size=1000)
+
+    path_pub = rospy.Publisher(
+        "dodger_path", Path, queue_size=1000)
     try:
         search_file = sys.argv[1]
         with open(search_file) as f:
@@ -49,9 +53,10 @@ def run():
             delta_t = 0.01
             t = 0
             while t < b_path[-1].t and not rospy.is_shutdown():
-                stp = b_path(t)
+                stp, j = b_path(t, True)
                 stp.z = 0.1
                 draw_stp_base(stp, pub, -1)
+                draw_path(b_path[:j + 1], path_pub)
                 for i, ag in enumerate(agents):
                     draw_stp_base(ag(t), pub, i, True)
                 t += delta_t
@@ -59,6 +64,21 @@ def run():
 
     except IndexError:
         print_usage()
+
+
+def draw_path(pth, pub):
+    if not rospy.is_shutdown():
+        ros_path = Path()
+        ros_path.header.frame_id = "/my_frame"
+        for i, stp in enumerate(pth):
+            ps = PoseStamped()
+            ps.header.frame_id = "/my_frame"
+            ps.header.seq = i
+            ps.pose.position.x = stp.x
+            ps.pose.position.y = stp.y
+            ros_path.poses.append(ps)
+
+        pub.publish(ros_path)
 
 
 def draw_stp_base(stp, pub, id_num, bad_guy=False):
