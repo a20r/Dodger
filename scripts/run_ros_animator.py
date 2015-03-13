@@ -49,7 +49,9 @@ def run():
             delta_t = 0.01
             t = 0
             while t < b_path[-1].t and not rospy.is_shutdown():
-                draw_stp_base(b_path(t), pub, -1)
+                stp = b_path(t)
+                stp.z = 0.1
+                draw_stp_base(stp, pub, -1)
                 for i, ag in enumerate(agents):
                     draw_stp_base(ag(t), pub, i, True)
                 t += delta_t

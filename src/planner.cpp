@@ -44,6 +44,7 @@ namespace Dodger {
                         ag->update_starting_positions();
                     }
 
+                    current_pt = Point(stp.get_x(), stp.get_y());
                     current_time = stp.get_t();
                     break;
                 }

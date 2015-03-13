@@ -88,6 +88,7 @@ namespace Dodger {
         this->current_y = start.get_y();
         this->holder_x = start.get_x();
         this->holder_y = start.get_y();
+        this->holder_t = 0;
         this->current_t = 0;
         this->distribution = normal_distribution<double>(0, noise_std);
     }
@@ -98,6 +99,8 @@ namespace Dodger {
         double ry = this->distribution(this->generator);
         path_vec.push_back(STPoint(this->current_x, this->current_y,
                     this->current_t));
+        // Point p = this->get_position(t);
+        // path_vec.push_back(STPoint(p.get_x(), p.get_y(), t));
         this->current_x += this->model_x->call(t) * dt + rx;
         this->current_y += this->model_y->call(t) * dt + ry;
         this->current_t = t;
@@ -112,19 +115,22 @@ namespace Dodger {
     void StochasticAgent::update_starting_positions() {
         this->holder_x = this->current_x;
         this->holder_y = this->current_y;
+        this->holder_t = this->current_t;
     }
 
     Point StochasticAgent::get_position(double t) {
         // t >= current_t
+        double dt = 0.01;
+        double tc = this->holder_t;
         double x = this->holder_x;
         double y = this->holder_y;
-        double tc = this->current_t;
-        double dt = 0.1;
-        while (tc < t) {
+
+        while (tc <= t) {
             x += this->model_x->call(tc) * dt;
             y += this->model_y->call(tc) * dt;
             tc += dt;
         }
+
         return Point(x, y);
     }
 

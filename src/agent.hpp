@@ -65,7 +65,7 @@ namespace Dodger {
             Path path;
             double current_x, current_y;
             double holder_x, holder_y;
-            double current_t;
+            double current_t, holder_t;
             default_random_engine generator;
             normal_distribution<double> distribution;
             vector<STPoint> path_vec;
