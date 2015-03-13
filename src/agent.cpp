@@ -3,6 +3,7 @@
 #include <sstream>
 #include <math.h>
 #include "point.hpp"
+#include "util.hpp"
 #include "stpoint.hpp"
 #include "agent.hpp"
 
@@ -99,8 +100,6 @@ namespace Dodger {
         double ry = this->distribution(this->generator);
         path_vec.push_back(STPoint(this->current_x, this->current_y,
                     this->current_t));
-        // Point p = this->get_position(t);
-        // path_vec.push_back(STPoint(p.get_x(), p.get_y(), t));
         this->current_x += this->model_x->call(t) * dt + rx;
         this->current_y += this->model_y->call(t) * dt + ry;
         this->current_t = t;
@@ -108,8 +107,8 @@ namespace Dodger {
 
     double StochasticAgent::get_difference(double t) {
         Point pp = this->get_position(t);
-        return sqrt(pow(current_x - pp.get_x(), 2)
-                + pow(current_y - pp.get_y(), 2));
+        return sqrt(pow(this->current_x - pp.get_x(), 2)
+                + pow(this->current_y - pp.get_y(), 2));
     }
 
     void StochasticAgent::update_starting_positions() {

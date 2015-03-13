@@ -19,15 +19,22 @@ int main() {
 
     double speed = 2.5;
     double wait_time = 0.1;
-    double noise_std = 0.1;
+    double noise_std = 0.05;
     std::list<Dodger::Agent *> agents;
 
     Dodger::StochasticAgent *ag = new Dodger::StochasticAgent(
-        new Dodger::SinModel(6, 3, 1, 0),
+        new Dodger::CosModel(6, 3, 1, 0),
         new Dodger::LinearModel(0, 0),
-        Dodger::Point(1, 2), noise_std);
+        Dodger::Point(3.68, 1), noise_std);
+
+    Dodger::StochasticAgent *ag2 = new Dodger::StochasticAgent(
+        new Dodger::CosModel(-4, 2, 1, 0),
+        new Dodger::LinearModel(0, 0),
+        Dodger::Point(0.32, 2), noise_std);
+
 
     agents.push_back(ag);
+    agents.push_back(ag2);
 
     Dodger::Point start(2, 0);
     Dodger::Point goal(2, 4);

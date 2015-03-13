@@ -50,6 +50,28 @@ namespace Dodger {
             double d;
 
     };
+
+    class CosModel : public Model {
+
+        public:
+            CosModel(double a, double b, double c, double d){
+                this->a = a;
+                this->b = b;
+                this->c = c;
+                this->d = d;
+            };
+            ~CosModel() {};
+            double call(double t);
+            std::string json();
+
+        private:
+            double a;
+            double b;
+            double c;
+            double d;
+
+    };
+
 }
 
 #endif
