@@ -13,10 +13,10 @@ import time
 
 from visualization_msgs.msg import Marker
 from nav_msgs.msg import Path
-from geometry_msgs.msg import PoseStamped, Pose
+from geometry_msgs.msg import PoseStamped, Pose, PointStamped
 
 
-duration = 10
+duration = 30
 
 
 def print_usage():
@@ -31,6 +31,7 @@ def run():
 
     path_pub = rospy.Publisher(
         "dodger_path", Path, queue_size=1000)
+
     try:
         search_file = sys.argv[1]
         with open(search_file) as f:

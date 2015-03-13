@@ -66,8 +66,7 @@ namespace Dodger {
             double current_x, current_y;
             double holder_x, holder_y;
             double current_t, holder_t;
-            default_random_engine generator;
-            normal_distribution<double> distribution;
+            double noise_std;
             vector<STPoint> path_vec;
 
     };

@@ -91,13 +91,14 @@ namespace Dodger {
         this->holder_y = start.get_y();
         this->holder_t = 0;
         this->current_t = 0;
-        this->distribution = normal_distribution<double>(0, noise_std);
+        this->noise_std = noise_std;
     }
 
     void StochasticAgent::step(double t) {
+
         double dt = t - this->current_t;
-        double rx = this->distribution(this->generator);
-        double ry = this->distribution(this->generator);
+        double rx = rand_float(-this->noise_std, this->noise_std);
+        double ry = rand_float(-this->noise_std, this->noise_std);
         path_vec.push_back(STPoint(this->current_x, this->current_y,
                     this->current_t));
         this->current_x += this->model_x->call(t) * dt + rx;
