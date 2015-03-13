@@ -35,7 +35,7 @@ int main() {
 
     Dodger::Roadmap rm = rmgr.generate(1000);
     Dodger::Search search(rm, speed, wait_time);
-    Dodger::Planner planner(search, agents, 0.5, 1);
+    Dodger::Planner planner(search, agents, 0.5, 0.7);
 
     Dodger::Path path = planner.get_path(start, goal);
     cout << Dodger::Search::json(path, agents) << endl;
