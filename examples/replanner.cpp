@@ -19,7 +19,7 @@ int main() {
 
     double speed = 2.5;
     double wait_time = 0.1;
-    double noise_std = 0.07;
+    double noise_std = 0.1;
     std::list<Dodger::Agent *> agents;
 
     Dodger::StochasticAgent *ag = new Dodger::StochasticAgent(

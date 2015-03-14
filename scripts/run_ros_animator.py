@@ -55,11 +55,12 @@ def run():
             t = 0
             while t < b_path[-1].t and not rospy.is_shutdown():
                 stp, j = b_path(t, True)
-                stp.z = 0.1
-                draw_stp_base(stp, pub, -1)
                 draw_path(b_path[:j + 1], path_pub)
+                draw_stp_base(stp, pub, -1)
+                draw_stp_base(b_path[-1], pub, -2, r=0, b=0, g=1, a=0.4)
+                draw_stp_base(b_path[0], pub, -3, r=1, b=0, g=0, a=0.4)
                 for i, ag in enumerate(agents):
-                    draw_stp_base(ag(t), pub, i, True)
+                    draw_stp_base(ag(t), pub, i, bad_guy=True)
                 t += delta_t
                 time.sleep(5 * delta_t)
 
@@ -82,7 +83,8 @@ def draw_path(pth, pub):
         pub.publish(ros_path)
 
 
-def draw_stp_base(stp, pub, id_num, bad_guy=False):
+def draw_stp_base(stp, pub, id_num, bad_guy=False, r=False, b=False,
+                  g=False, a=False):
     if not rospy.is_shutdown():
         marker = Marker()
         marker.header.frame_id = "/my_frame"
@@ -99,16 +101,23 @@ def draw_stp_base(stp, pub, id_num, bad_guy=False):
         marker.scale.x = 0.3
         marker.scale.y = 0.3
         marker.scale.z = 0.3
-        marker.mesh_use_embedded_materials = True
 
-        marker.pose.orientation.w = 0
-        marker.pose.orientation.x = 0
-        marker.pose.orientation.y = 0
-        marker.pose.orientation.z = 0
+        if r is False and g is False and b is False and a is False:
+            marker.mesh_use_embedded_materials = True
+        else:
+            marker.color.r = r
+            marker.color.g = g
+            marker.color.b = b
+            marker.color.a = a
 
         marker.pose.position.x = stp.x
         marker.pose.position.y = stp.y
-        marker.pose.position.z = stp.z
+
+        if bad_guy:
+            marker.pose.position.z = 0
+        else:
+            marker.pose.position.z = 0.1
+
         marker.id = id_num
         pub.publish(marker)
 

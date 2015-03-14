@@ -40,6 +40,7 @@ namespace Dodger {
                 }
 
                 if (replan) {
+                    cerr << "Replanning..." << endl;
                     for (Agent *ag : this->agents) {
                         ag->update_starting_positions();
                     }
