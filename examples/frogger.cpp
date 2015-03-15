@@ -17,7 +17,7 @@ int main() {
     srand(time(NULL));
 
     double speed = 2;
-    double wait_time = 0.1;
+    double wait_time = 0.4;
     std::list<Dodger::Agent *> agents;
 
     Dodger::Agent *ag = new Dodger::Agent(
