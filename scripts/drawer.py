@@ -5,6 +5,7 @@ __all__ = ["Axes3D"]
 
 import matplotlib.pyplot as plt
 import warnings
+import path
 from mpl_toolkits.mplot3d import Axes3D
 
 
@@ -71,7 +72,11 @@ class Drawer(object):
         ts = list()
         for i in xrange(num_samples):
             t = i * t_step
-            ag_pt = ag.get_position(t)
+            if type(ag) == path.Path:
+                ag_pt = ag(t)
+            else:
+                ag_pt = ag.get_position(t)
+
             xs.append(ag_pt.x)
             ys.append(ag_pt.y)
             ts.append(t)

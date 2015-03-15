@@ -30,4 +30,18 @@ namespace Dodger {
         return buffer.str();
     }
 
+    double CosModel::call(double t) {
+        return this->a * cos(this->b * t + this->c) + this->d;
+    }
+
+    std::string CosModel::json() {
+        std::stringstream buffer;
+        buffer << "{\"type\": \"Sin\", \"params\": [" <<
+            this->a << "," << this->b <<
+            "," << this->c << "," << this->d
+            << "]}";
+        return buffer.str();
+    }
+
+
 }

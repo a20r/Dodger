@@ -23,7 +23,7 @@ int main() {
     Dodger::StochasticAgent *ag = new Dodger::StochasticAgent(
         new Dodger::SinModel(2, 3, 1, 2),
         new Dodger::LinearModel(0, 1),
-        Dodger::Point(1, 2));
+        Dodger::Point(1, 2), 0.1);
 
     agents.push_back(ag);
 

@@ -2,7 +2,6 @@
 
 import agent
 import drawer
-import animator
 import model
 import path
 import stpoint
@@ -23,9 +22,14 @@ def run():
             result = json.loads(f.read())
             agents = list()
             for ag in result["agents"]:
-                model_x = model.models[ag["x"]["type"]](*ag["x"]["params"])
-                model_y = model.models[ag["y"]["type"]](*ag["y"]["params"])
-                agents.append(agent.Agent(model_x, model_y))
+                try:
+                    model_x = model.models[ag["x"]["type"]](*ag["x"]["params"])
+                    model_y = model.models[ag["y"]["type"]](*ag["y"]["params"])
+                    agents.append(agent.Agent(model_x, model_y))
+                except TypeError:
+                    agents.append(path.make(list()))
+                    for p in ag:
+                        agents[-1].append(stpoint.make(p["x"], p["y"], p["t"]))
 
             b_path = path.make(list())
             for st_p in result["path"]:
