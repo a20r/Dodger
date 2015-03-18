@@ -24,7 +24,11 @@ namespace Dodger {
 
         for (Agent *ag : this->agents) {
             dist = ag->get_position(t).euclid_dist(position);
-            pot_sum += 1 / (dist * dist + 0.1);
+            if (dist < MIN_DIST) {
+                dist = MIN_DIST;
+            }
+
+            pot_sum += 1 / (pow(dist - MIN_DIST, 2) + 0.1);
         }
 
         return pot_sum;

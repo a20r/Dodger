@@ -7,6 +7,8 @@
 #include "point.hpp"
 #include "path.hpp"
 
+#define MIN_DIST 0.1
+
 using namespace std;
 
 namespace Dodger {
