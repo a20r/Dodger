@@ -124,11 +124,11 @@ namespace Dodger {
                 }
 
                 total_cost = nr_cost + r_cost;
-                // if (-current.get_weight() > total_cost) {
-                    // open_set.push(STPointWeight(*iterator, current.get_weight()));
-                // } else {
+                if (-current.get_weight() > total_cost) {
+                    open_set.push(STPointWeight(*iterator, current.get_weight()));
+                } else {
                     open_set.push(STPointWeight(*iterator, -total_cost));
-                // }
+                }
             }
         }
 
