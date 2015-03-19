@@ -95,14 +95,21 @@ namespace Dodger {
     }
 
     void StochasticAgent::step(double t) {
-
-        double dt = t - this->current_t;
+        int sample_rate = 100; // per second
+        int num_samples = (t - this->current_t) * sample_rate;
+        double dt = 1.0 / sample_rate;
+        double tc = this->current_t;
         double rx = rand_float(-this->noise_std, this->noise_std);
         double ry = rand_float(-this->noise_std, this->noise_std);
-        path_vec.push_back(STPoint(this->current_x, this->current_y,
-                    this->current_t));
-        this->current_x += this->model_x->call(t) * dt + rx;
-        this->current_y += this->model_y->call(t) * dt + ry;
+
+        for (int i = 0; i <= num_samples; i++) {
+            this->current_x += this->model_x->call(tc + i * dt) * dt + rx;
+            this->current_y += this->model_y->call(tc + i * dt) * dt + rx;
+
+            path_vec.push_back(STPoint(this->current_x, this->current_y,
+                        tc + i * dt));
+        }
+
         this->current_t = t;
     }
 
@@ -120,15 +127,15 @@ namespace Dodger {
 
     Point StochasticAgent::get_position(double t) {
         // t >= current_t
-        double dt = 0.01;
+        int num_samples = 100;
+        double dt = (t - this->holder_t) / num_samples;
         double tc = this->holder_t;
         double x = this->holder_x;
         double y = this->holder_y;
 
-        while (tc <= t) {
-            x += this->model_x->call(tc) * dt;
-            y += this->model_y->call(tc) * dt;
-            tc += dt;
+        for (int i = 0; i <= num_samples; i++) {
+            x += this->model_x->call(tc + i * dt) * dt;
+            y += this->model_y->call(tc + i * dt) * dt;
         }
 
         return Point(x, y);

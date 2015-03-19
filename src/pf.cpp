@@ -6,7 +6,7 @@
 namespace Dodger {
 
     PF::PF(list<Agent *> agents, double goal_radius, double speed,
-            double dt, double num_samples) {
+            double dt, int num_samples) {
         this->agents = agents;
         this->goal_radius = goal_radius;
         this->speed = speed;
@@ -61,11 +61,15 @@ namespace Dodger {
         return best_point;
     }
 
+    Path PF::get_path(Point start, Point goal) {
+        return this->get_path(start, goal, 0);
+    }
+
     Path PF::get_path(Point start, Point goal, double t) {
         vector<STPoint> stp_list;
         STPoint current_pt = STPoint(start.get_x(), start.get_y(), t);
 
-        while (current_pt.euclid_dist(goal) < this->goal_radius) {
+        while (current_pt.euclid_dist(goal) > this->goal_radius) {
             for (Agent *ag : this->agents) {
                 ag->step(current_pt.get_t());
                 ag->update_starting_positions();

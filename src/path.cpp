@@ -26,7 +26,7 @@ namespace Dodger {
         STPoint p, prev;
         for (int i = 0; i < this->st_list.size() - 1; i++) {
             p = st_list[i + 1];
-            prev = st_list[i - 1];
+            prev = st_list[i];
             if (t <= p.get_t()) {
                 t_diff = p.get_t();
                 rel_t = t - prev.get_t();

@@ -11,22 +11,17 @@
 #include "agent.hpp"
 #include "path.hpp"
 #include "search.hpp"
-#include "planner.hpp"
+#include "pf.hpp"
 
 int main() {
 
     srand(time(NULL));
 
     double speed = 1.5;
-    double wait_time = 0.1;
     double noise_std = 0.001;
-    double pred_dev = 0.6;
-    double goal_radius = 0.5;
-    double width = 4;
-    double height = 4;
-    double conn_dist = 0.2;
-    int num_points = 1000;
-
+    double goal_radius = 0.3;
+    double dt = 0.07;
+    int num_samples = 20;
     std::list<Dodger::Agent *> agents;
 
     Dodger::StochasticAgent *ag = new Dodger::StochasticAgent(
@@ -68,12 +63,9 @@ int main() {
 
     Dodger::Point start(2, 0);
     Dodger::Point goal(2, 4);
-    Dodger::RoadmapGenerator rmgr(width, height, start, conn_dist);
 
-    Dodger::Roadmap rm = rmgr.generate(num_points);
-    Dodger::Search search(rm, speed, wait_time);
-    Dodger::Planner planner(search, agents, goal_radius, pred_dev);
+    Dodger::PF pf(agents, goal_radius, speed, dt, num_samples);
 
-    Dodger::Path path = planner.get_path(start, goal);
+    Dodger::Path path = pf.get_path(start, goal);
     cout << Dodger::Search::json(path, agents) << endl;
 }

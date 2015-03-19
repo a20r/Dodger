@@ -1,5 +1,5 @@
-#ifndef PLANNER_H
-#define PLANNER_H
+#ifndef PF_H
+#define PF_H
 
 #include <list>
 #include <math.h>
@@ -19,7 +19,7 @@ namespace Dodger {
             PF() {};
             ~PF() {};
             PF(list<Agent *> agents, double goal_radius, double speed,
-                    double dt, double num_samples);
+                    double dt, int num_samples);
             Path get_path(Point start, Point goal, double t);
             Path get_path(Point start, Point goal);
 
@@ -34,7 +34,7 @@ namespace Dodger {
             double goal_radius;
             double speed;
             double dt;
-            double num_samples;
+            int num_samples;
     };
 }
 
