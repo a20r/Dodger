@@ -26,6 +26,9 @@ add_executable(stochastic examples/stochastic.cpp)
 add_executable(replanner examples/replanner.cpp)
 add_executable(potential examples/potential.cpp)
 
+# experiments
+add_executable(exp_planner_speed_noise experiments/planner_speed_noise.cpp)
+
 # linking libdodger
 target_link_libraries(test_point dodger)
 target_link_libraries(test_st_point dodger)
@@ -37,3 +40,4 @@ target_link_libraries(pendulum dodger)
 target_link_libraries(stochastic dodger)
 target_link_libraries(replanner dodger)
 target_link_libraries(potential dodger)
+target_link_libraries(exp_planner_speed_noise dodger)
