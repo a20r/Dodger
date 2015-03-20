@@ -28,7 +28,10 @@ namespace Dodger {
             p = st_list[i + 1];
             prev = st_list[i];
             if (t <= p.get_t()) {
-                t_diff = p.get_t();
+                t_diff = p.get_t() - prev.get_t();
+                if (t_diff <= 0) {
+                    continue;
+                }
                 rel_t = t - prev.get_t();
                 x_vel = (p.get_x() - prev.get_x()) / t_diff;
                 y_vel = (p.get_y() - prev.get_y()) / t_diff;

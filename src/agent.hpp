@@ -33,6 +33,7 @@ namespace Dodger {
             virtual void step(double t);
             virtual double get_difference(double t);
             virtual void update_starting_positions();
+            virtual vector<STPoint> get_path();
             double get_prob(double x, double y, double t_0, double t_m);
             virtual std::string json();
             static double get_probability(double x, double y, double t_0,
@@ -56,6 +57,7 @@ namespace Dodger {
             double get_difference(double t);
             void update_starting_positions();
             Point get_position(double t);
+            vector<STPoint> get_path();
             std::string json();
 
         protected:

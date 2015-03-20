@@ -15,5 +15,6 @@
 #include "search.hpp"
 #include "stpoint.hpp"
 #include "util.hpp"
+#include "stats.hpp"
 
 #endif

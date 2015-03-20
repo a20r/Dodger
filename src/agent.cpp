@@ -41,6 +41,11 @@ namespace Dodger {
         return 0;
     }
 
+    vector<STPoint> Agent::get_path() {
+        vector<STPoint> empty;
+        return empty;
+    }
+
     double Agent::get_prob(double x, double y, double t_0, double t_m) {
         double t = t_0;
         double prob_sum = 0.0;
@@ -139,6 +144,10 @@ namespace Dodger {
         }
 
         return Point(x, y);
+    }
+
+    vector<STPoint> StochasticAgent::get_path() {
+        return this->path_vec;
     }
 
     std::string StochasticAgent::json() {
