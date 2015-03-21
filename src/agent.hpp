@@ -27,7 +27,10 @@ namespace Dodger {
             Agent() {};
             Agent(Model *model_x, Model *model_y, double noise);
             Agent(Model *model_x, Model *model_y);
-            ~Agent() {};
+            ~Agent() {
+                delete this->model_x;
+                delete this->model_y;
+            };
             double get_normal_dist(double x, double std);
             virtual Point get_position(double t);
             virtual void step(double t);
@@ -52,7 +55,10 @@ namespace Dodger {
             StochasticAgent() {};
             StochasticAgent(Model *model_x, Model *model_y, Point start,
                     double noise_std);
-            ~StochasticAgent() {};
+            ~StochasticAgent() {
+                delete this->model_x;
+                delete this->model_y;
+            };
             void step(double t);
             double get_difference(double t);
             void update_starting_positions();
