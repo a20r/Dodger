@@ -11,6 +11,8 @@ namespace Dodger {
         public:
             static double avg_min_distance(Path path, list<Agent *> ags);
             static double min_distance(Path path, list<Agent *> ags);
+            static double mean(double arr[], int size);
+            static double std(double arr[], int size);
     };
 
 }
