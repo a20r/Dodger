@@ -19,7 +19,7 @@ int main() {
 
     double speed = 1.5;
     double wait_time = 0.1;
-    double noise_std = 0.001;
+    double noise_std = 0.000;
     double pred_dev = 0.6;
     double goal_radius = 0.5;
     double width = 4;
