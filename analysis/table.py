@@ -9,7 +9,6 @@ class Table(object):
         self.data = dict()
         self.rows = list()
         self.headers = map(lambda val: val.strip(), headers)
-        print self.headers
         self.index_data = dict()
         for header in self.headers:
             self.data[header] = list()
