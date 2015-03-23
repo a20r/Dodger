@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <ctime>
 #include <time.h>
+#include <utility>
 #include "dodger.hpp"
 
 int main() {
@@ -20,6 +21,8 @@ int main() {
     double min_distances [num_runs];
     double avg_min_distances [num_runs];
     double times [num_runs];
+    double max_costs [num_runs];
+    double avg_costs [num_runs];
 
     int num_samples = 20;
     double dt = 0.07;
@@ -35,8 +38,11 @@ int main() {
     cout << "mean_avg_min_distance" << ", ";
     cout << "std_avg_min_distance" << ", ";
     cout << "avg_times" << ", ";
-    cout << "std_times" << endl;
-
+    cout << "std_times" << ", ";
+    cout << "mean_max_cost" << ", ";
+    cout << "std_max_cost" << ", ";
+    cout << "mean_avg_cost" << ", ";
+    cout << "std_avg_cost" << endl;
 
     for (int i = 0; i < num_speeds; i++) {
         for (int j = 0; j < num_noises; j++) {
@@ -101,6 +107,9 @@ int main() {
                 avg_min_distances[k] = Dodger::Stats::avg_min_distance(path,
                         agents);
                 times[k] = duration;
+                pair<double, double> costs = Dodger::Stats::costs(path, agents);
+                max_costs[k] = get<0>(costs);
+                avg_costs[k] = get<1>(costs);
 
                 // for (Dodger::Agent *ag : agents) {
                     // delete ag;
@@ -114,7 +123,12 @@ int main() {
             cout << Dodger::Stats::mean(avg_min_distances, num_runs) << ", ";
             cout << Dodger::Stats::std(avg_min_distances, num_runs) << ", ";
             cout << Dodger::Stats::mean(times, num_runs) << ", ";
-            cout << Dodger::Stats::std(times, num_runs) << endl;
+            cout << Dodger::Stats::std(times, num_runs) << ", ";
+            cout << Dodger::Stats::mean(max_costs, num_runs) << ", ";
+            cout << Dodger::Stats::std(max_costs, num_runs) << ", ";
+            cout << Dodger::Stats::mean(avg_costs, num_runs) << ", ";
+            cout << Dodger::Stats::std(avg_costs, num_runs) << endl;
+
         }
     }
 }

@@ -67,4 +67,29 @@ namespace Dodger {
 
         return sqrt(sum / size);
     }
+
+    pair<double, double> Stats::costs(Path path, list<Agent *> ags) {
+        double dt = 0.05;
+        double max_cost = -1;
+        int counter = 0;
+        double cost_sum = 0.0;
+
+        for (int i = 0; i < path.get_list().size() - 1; i++) {
+            double tc = path.get(i).get_t();
+            double max_time = path.get(i + 1).get_t();
+            while (tc <= max_time) {
+                counter++;
+                Point p_pos = path.get_position(tc);
+                double cost = Agent::get_probability(p_pos.get_x(),
+                        p_pos.get_y(), tc, max_time, ags);
+                if (max_cost < 0 || cost > max_cost) {
+                    max_cost = cost;
+                }
+                cost_sum += cost;
+                tc += dt;
+            }
+        }
+
+        return make_pair(max_cost, cost_sum / counter);
+    }
 }

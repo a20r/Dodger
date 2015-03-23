@@ -4,6 +4,7 @@
 
 #include "path.hpp"
 #include "agent.hpp"
+#include "stpoint.hpp"
 
 namespace Dodger {
 
@@ -13,6 +14,7 @@ namespace Dodger {
             static double min_distance(Path path, list<Agent *> ags);
             static double mean(double arr[], int size);
             static double std(double arr[], int size);
+            static pair<double, double> costs(Path path, list<Agent *> ags);
     };
 
 }
