@@ -11,8 +11,8 @@
 
 int main() {
 
-    const int num_speeds = 4;
-    double speeds [num_speeds] = {1, 1.5, 2, 2.5};
+    const int num_speeds = 13;
+    double speeds [num_speeds] = {1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7};
 
     const int num_noises = 6;
     double noises [num_noises] = {0.0, 0.002, 0.004, 0.006, 0.008, 0.01};

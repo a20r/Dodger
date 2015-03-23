@@ -105,6 +105,7 @@ def plot_noise_planner(planner, i):
     plt.title("{}: Speed v.s. Mean Maximum Planner Cost"
               .format(name_dict[planner]))
     plt.legend()
+    plt.ylim([0, 0.5])
     plt.savefig("figures/{}_mean_max_cost_{}.pdf".format(planner, i),
                 bbox_inches="tight")
 
@@ -113,6 +114,7 @@ def plot_noise_planner(planner, i):
     plt.title("{}: Speed v.s. Mean Average Planner Cost"
               .format(name_dict[planner]))
     plt.legend()
+    plt.ylim([0, 0.04])
     plt.savefig("figures/{}_mean_avg_cost_{}.pdf".format(planner, i),
                 bbox_inches="tight")
 
@@ -176,8 +178,8 @@ def plot_noise_std_planner(planner, i):
 
 
 if __name__ == "__main__":
-    # plot_noise_planner("planner", 0)
+    plot_noise_planner("planner", 0)
     plot_noise_planner("pf", 0)
-    # plot_noise_std_planner("planner", 0)
+    plot_noise_std_planner("planner", 0)
     plot_noise_std_planner("pf", 0)
     # plt.show()
