@@ -24,7 +24,7 @@ def plot_speed_data(tb, speed, means, stds, yunit):
 
 
 def plot_speed_vs(tb, means, stds, yunit):
-    speeds = [1, 1.5, 2, 2.5]
+    speeds = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
     for speed in speeds:
         plot_speed_data(tb, speed, means, stds, yunit)
 
@@ -73,7 +73,7 @@ def plot_noise_planner(planner, i):
     plot_noise_vs(tb, "mean_min_distance", "std_min_distance", "Mean Minimum Distance [m]")
     plt.title("{}: Speed v.s. Mean Minimum Distance"
               .format(name_dict[planner]))
-    plt.ylim([0, 0.45])
+    plt.ylim([0, 0.6])
 
     if planner == "planner":
         plt.legend(loc=2)
@@ -114,7 +114,7 @@ def plot_noise_planner(planner, i):
     plt.title("{}: Speed v.s. Mean Average Planner Cost"
               .format(name_dict[planner]))
     plt.legend()
-    plt.ylim([0, 0.04])
+    plt.ylim([0, 0.06])
     plt.savefig("figures/{}_mean_avg_cost_{}.pdf".format(planner, i),
                 bbox_inches="tight")
 
@@ -128,7 +128,7 @@ def plot_noise_std_data(tb, speed, stds, yunit):
 
 
 def plot_noise_std_vs(tb, stds, yunit):
-    speeds = [1, 1.5, 2, 2.5]
+    speeds = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]
     for speed in speeds:
         plot_noise_std_data(tb, speed, stds, yunit)
 

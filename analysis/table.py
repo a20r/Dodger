@@ -83,7 +83,6 @@ class Table(object):
             ret_dict[header] = self.rows[index][i]
         return ret_dict
 
-    plt.ylim([0, 0.4])
     def __call__(self, index, value=None, s_index=None):
         if value:
             if s_index:
