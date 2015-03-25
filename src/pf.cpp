@@ -31,7 +31,11 @@ namespace Dodger {
             pot_sum += 1 / (pow(dist - MIN_DIST, 2) + 0.1);
         }
 
+
         return pot_sum;
+
+        // return 40 * Agent::get_probability(position.get_x(), position.get_y(), t,
+        //         t + 2.4, this->agents);
     }
 
     double PF::get_potential(Point position, Point goal, double t) {
