@@ -61,16 +61,33 @@ def plot_noise_data(tb, noise, means, stds, yunit):
                  label="$\epsilon$ = {}".format(noise))
 
 
+def plot_wait_time_data(tb, speed, means, stds, yunit):
+    xs = tb("speed", value=speed, s_index="wait_time")
+    ys = tb("speed", value=speed, s_index=means)
+    ss = tb("speed", value=speed, s_index=stds)
+    plt.xlabel("Wait Time ($\delta t$) [s]")
+    plt.ylabel(yunit)
+    plt.errorbar(xs, ys, fmt='x-', yerr=ss,
+                 label="$s$ = {}".format(speed))
+
+
 def plot_noise_vs(tb, means, stds, yunit):
     noises = [0.002, 0.004, 0.006, 0.008, 0.01]
     for noise in noises:
         plot_noise_data(tb, noise, means, stds, yunit)
 
 
+def plot_wait_time_vs(tb, means, stds, yunit):
+    speeds = [4, 4.5]
+    for speed in speeds:
+        plot_wait_time_data(tb, speed, means, stds, yunit)
+
+
 def plot_noise_planner(planner, i):
     tb = table.load_csv("data/{}_speed_noise_{}.csv".format(planner, i))
     plt.figure()
-    plot_noise_vs(tb, "mean_min_distance", "std_min_distance", "Mean Minimum Distance [m]")
+    plot_noise_vs(tb, "mean_min_distance", "std_min_distance",
+                  "Mean Minimum Distance [m]")
     plt.title("{}: Speed v.s. Mean Minimum Distance"
               .format(name_dict[planner]))
     plt.ylim([0, 0.6])
@@ -119,6 +136,61 @@ def plot_noise_planner(planner, i):
                 bbox_inches="tight")
 
 
+def plot_wait_time_planner(planner, i):
+    tb = table.load_csv("data/{}_wait_{}.csv".format(planner, i))
+    plt.figure()
+    plot_wait_time_vs(tb, "mean_min_distance", "std_min_distance",
+                      "Mean Minimum Distance [m]")
+    plt.title("{}: Speed v.s. Mean Minimum Distance"
+              .format(name_dict[planner]))
+    plt.ylim([0, 0.6])
+
+    if planner == "planner":
+        plt.legend(loc=2)
+    else:
+        plt.legend()
+
+    plt.savefig("figures/{}_wt_mean_min_distance_{}.pdf"
+                .format(planner, i),
+                bbox_inches="tight")
+
+    plt.figure()
+    plot_wait_time_vs(tb, "mean_avg_min_distance", "std_avg_min_distance",
+                      "Mean Average Minimum Distance [m]")
+    plt.title("{}: Speed v.s. Mean Average Minimum Distance"
+              .format(name_dict[planner]))
+    plt.legend()
+    plt.savefig("figures/{}_wt_mean_avg_min_distance_{}.pdf"
+                .format(planner, i),
+                bbox_inches="tight")
+
+    plt.figure()
+    plot_wait_time_vs(tb, "avg_times", "std_times", "Time [s]")
+    plt.title("{}: Speed v.s. Mean Computational Time"
+              .format(name_dict[planner]))
+    plt.legend()
+    plt.savefig("figures/{}_wt_mean_times_{}.pdf".format(planner, i),
+                bbox_inches="tight")
+
+    plt.figure()
+    plot_wait_time_vs(tb, "mean_max_cost", "std_max_cost", "Mean Maximum Cost")
+    plt.title("{}: Speed v.s. Mean Maximum Planner Cost"
+              .format(name_dict[planner]))
+    plt.legend()
+    # plt.ylim([0, 0.5])
+    plt.savefig("figures/{}_wt_mean_max_cost_{}.pdf".format(planner, i),
+                bbox_inches="tight")
+
+    plt.figure()
+    plot_wait_time_vs(tb, "mean_avg_cost", "std_avg_cost", "Mean Average Cost")
+    plt.title("{}: Speed v.s. Mean Average Planner Cost"
+              .format(name_dict[planner]))
+    plt.legend()
+    # plt.ylim([0, 0.06])
+    plt.savefig("figures/{}_wt_mean_avg_cost_{}.pdf".format(planner, i),
+                bbox_inches="tight")
+
+
 def plot_noise_std_data(tb, speed, stds, yunit):
     xs = tb("speed", value=speed, s_index="noise")
     ys = tb("speed", value=speed, s_index=stds)
@@ -144,8 +216,7 @@ def plot_noise_std_planner(planner, i):
                 bbox_inches="tight")
 
     plt.figure()
-    plot_noise_std_vs(tb, "std_avg_min_distance",
-                  "Standard Deviation [m]")
+    plot_noise_std_vs(tb, "std_avg_min_distance", "Standard Deviation [m]")
     plt.title("{}: Noise v.s. Mean Average Distance Standard Deviation"
               .format(name_dict[planner]))
     plt.legend(loc=2)
@@ -178,8 +249,9 @@ def plot_noise_std_planner(planner, i):
 
 
 if __name__ == "__main__":
-    plot_noise_planner("planner", 0)
-    plot_noise_planner("pf", 0)
-    plot_noise_std_planner("planner", 0)
-    plot_noise_std_planner("pf", 0)
-    # plt.show()
+    # plot_noise_planner("planner", 0)
+    # plot_noise_planner("pf", 0)
+    # plot_noise_std_planner("planner", 0)
+    # plot_noise_std_planner("pf", 0)
+    plot_wait_time_planner("planner", 0)
+    plt.show()

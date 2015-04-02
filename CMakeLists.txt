@@ -29,6 +29,8 @@ add_executable(potential examples/potential.cpp)
 # experiments
 add_executable(exp_planner_speed_noise_0 experiments/planner_speed_noise_0.cpp)
 add_executable(exp_pf_speed_noise_0 experiments/pf_speed_noise_0.cpp)
+add_executable(exp_planner_wait_0 experiments/planner_wait_0.cpp)
+
 
 # linking libdodger
 target_link_libraries(test_point dodger)
@@ -43,3 +45,4 @@ target_link_libraries(replanner dodger)
 target_link_libraries(potential dodger)
 target_link_libraries(exp_planner_speed_noise_0 dodger)
 target_link_libraries(exp_pf_speed_noise_0 dodger)
+target_link_libraries(exp_planner_wait_0 dodger)
