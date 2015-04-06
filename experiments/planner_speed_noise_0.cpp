@@ -117,10 +117,6 @@ int main() {
                 max_costs[k] = get<0>(costs);
                 avg_costs[k] = get<1>(costs);
 
-
-                // for (Dodger::Agent *ag : agents) {
-                //     delete ag;
-                // }
             }
 
             cout << speed << ", ";

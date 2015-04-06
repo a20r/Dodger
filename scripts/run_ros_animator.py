@@ -13,7 +13,7 @@ import time
 
 from visualization_msgs.msg import Marker
 from nav_msgs.msg import Path
-from geometry_msgs.msg import PoseStamped, Pose, PointStamped
+from geometry_msgs.msg import PoseStamped
 
 
 duration = 30
@@ -63,6 +63,7 @@ def run():
                     draw_stp_base(ag(t), pub, i, bad_guy=True)
                 t += delta_t
                 time.sleep(5 * delta_t)
+                # time.sleep(5)
 
     except IndexError:
         print_usage()
@@ -95,7 +96,8 @@ def draw_stp_base(stp, pub, id_num, bad_guy=False, r=False, b=False,
             marker.mesh_resource = "package://hector_quadrotor_description/"\
                 + "meshes/quadrotor/quadrotor_base.dae"
         else:
-            marker.mesh_resource = "package://pr2_description/meshes/base_v0/base.dae"
+            marker.mesh_resource = "package://pr2_description/meshes/"\
+                + "base_v0/base.dae"
 
         marker.action = marker.ADD
         marker.scale.x = 0.3

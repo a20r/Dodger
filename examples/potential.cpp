@@ -18,7 +18,7 @@ int main() {
     srand(time(NULL));
 
     double speed = 1.5;
-    double noise_std = 0.001;
+    double noise_std = 0.004;
     double goal_radius = 0.3;
     double dt = 0.07;
     int num_samples = 20;
