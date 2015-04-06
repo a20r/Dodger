@@ -77,6 +77,22 @@ def plot_noise_vs(tb, means, stds, yunit):
         plot_noise_data(tb, noise, means, stds, yunit)
 
 
+def shitty_plot_noise_data(tb, noise, means, stds, yunit):
+    xs = tb("noise", value=noise, s_index="speed")[2:]
+    ys = tb("noise", value=noise, s_index=means)[2:]
+    ss = tb("noise", value=noise, s_index=stds)[2:]
+    plt.xlabel("Speed [m/s]")
+    plt.ylabel(yunit)
+    plt.errorbar(xs, ys, fmt='x-', yerr=ss,
+                 label="$\epsilon$ = {}".format(noise))
+
+
+def shitty_plot_noise_vs(tb, means, stds, yunit):
+    noises = [0.002, 0.004, 0.006, 0.008, 0.01]
+    for noise in noises:
+        shitty_plot_noise_data(tb, noise, means, stds, yunit)
+
+
 def plot_wait_time_vs(tb, means, stds, yunit):
     speeds = [4, 4.5]
     for speed in speeds:
@@ -115,6 +131,14 @@ def plot_noise_planner(planner, i):
               .format(name_dict[planner]))
     plt.legend()
     plt.savefig("figures/{}_mean_times_{}.pdf".format(planner, i),
+                bbox_inches="tight")
+
+    plt.figure()
+    shitty_plot_noise_vs(tb, "avg_times", "std_times", "Time [s]")
+    plt.title("{}: Speed v.s. Mean Computational Time"
+              .format(name_dict[planner]))
+    plt.legend()
+    plt.savefig("figures/{}_small_mean_times_{}.pdf".format(planner, i),
                 bbox_inches="tight")
 
     plt.figure()
@@ -249,9 +273,9 @@ def plot_noise_std_planner(planner, i):
 
 
 if __name__ == "__main__":
-    # plot_noise_planner("planner", 0)
-    # plot_noise_planner("pf", 0)
-    # plot_noise_std_planner("planner", 0)
-    # plot_noise_std_planner("pf", 0)
-    plot_wait_time_planner("planner", 0)
-    plt.show()
+    plot_noise_planner("planner", 0)
+    plot_noise_planner("pf", 0)
+    plot_noise_std_planner("planner", 0)
+    plot_noise_std_planner("pf", 0)
+    # plot_wait_time_planner("planner", 0)
+    # plt.show()
