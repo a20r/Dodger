@@ -50,7 +50,7 @@ int main() {
             double noise_std = noises[j];
 
             for (int k = 0; k < num_runs; k++) {
-                srand(k);
+                srand(time(NULL));
                 cerr << speed << ", " << noise_std << ", " << k << endl;
                 std::list<Dodger::Agent *> agents;
 
