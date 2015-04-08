@@ -28,7 +28,11 @@ add_executable(potential examples/potential.cpp)
 
 # experiments
 add_executable(exp_planner_speed_noise_0 experiments/planner_speed_noise_0.cpp)
+add_executable(exp_planner_speed_noise_1 experiments/planner_speed_noise_1.cpp)
+add_executable(exp_planner_speed_noise_2 experiments/planner_speed_noise_2.cpp)
 add_executable(exp_pf_speed_noise_0 experiments/pf_speed_noise_0.cpp)
+add_executable(exp_pf_speed_noise_1 experiments/pf_speed_noise_1.cpp)
+add_executable(exp_pf_speed_noise_2 experiments/pf_speed_noise_2.cpp)
 add_executable(exp_planner_wait_0 experiments/planner_wait_0.cpp)
 
 
@@ -44,5 +48,9 @@ target_link_libraries(stochastic dodger)
 target_link_libraries(replanner dodger)
 target_link_libraries(potential dodger)
 target_link_libraries(exp_planner_speed_noise_0 dodger)
+target_link_libraries(exp_planner_speed_noise_1 dodger)
+target_link_libraries(exp_planner_speed_noise_2 dodger)
 target_link_libraries(exp_pf_speed_noise_0 dodger)
+target_link_libraries(exp_pf_speed_noise_1 dodger)
+target_link_libraries(exp_pf_speed_noise_2 dodger)
 target_link_libraries(exp_planner_wait_0 dodger)
