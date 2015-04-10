@@ -55,11 +55,11 @@ def run():
             setting_up = True
             while counter < num_screenshots and not rospy.is_shutdown():
                 t = counter * delta_t
-                stp, j = b_path(t, True)
-                draw_path(b_path[:j + 1], path_pub)
-                draw_stp_base(stp, pub, -1)
-                draw_stp_base(b_path[-1], pub, -2, r=0, b=0, g=1, a=0.4)
-                draw_stp_base(b_path[0], pub, -3, r=1, b=0, g=0, a=0.4)
+                # stp, j = b_path(t, True)
+                # draw_path(b_path[:j + 1], path_pub)
+                # draw_stp_base(stp, pub, -1)
+                # draw_stp_base(b_path[-1], pub, -2, r=0, b=0, g=1, a=0.4)
+                # draw_stp_base(b_path[0], pub, -3, r=1, b=0, g=0, a=0.4)
                 for i, ag in enumerate(agents):
                     draw_stp_base(ag(t), pub, i, bad_guy=True)
                 if not setting_up:

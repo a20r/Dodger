@@ -61,15 +61,15 @@ int main() {
                 cerr << speed << ", " << noise_std << ", " << k << endl;
                 std::list<Dodger::Agent *> agents;
 
-            Dodger::StochasticAgent *ag = new Dodger::StochasticAgent(
-                new Dodger::CosModel(-6, 3, 1, 0),
-                new Dodger::CosModel(-6, 3, 1, 0),
-                Dodger::Point(0, 0), noise_std);
+                Dodger::StochasticAgent *ag = new Dodger::StochasticAgent(
+                    new Dodger::CosModel(-6, 3, 1, 0),
+                    new Dodger::CosModel(-6, 3, 1, 0),
+                    Dodger::Point(0, 0), noise_std);
 
-            Dodger::StochasticAgent *ag2 = new Dodger::StochasticAgent(
-                new Dodger::CosModel(6, 3, 1, 0),
-                new Dodger::CosModel(-6, 3, 1, 0),
-                Dodger::Point(4, 0), noise_std);
+                Dodger::StochasticAgent *ag2 = new Dodger::StochasticAgent(
+                    new Dodger::CosModel(6, 3, 1, 0),
+                    new Dodger::CosModel(-6, 3, 1, 0),
+                    Dodger::Point(4, 0), noise_std);
 
                 agents.push_back(ag);
                 agents.push_back(ag2);
