@@ -106,7 +106,7 @@ def plot_noise_planner(planner, i):
                   "Mean Minimum Distance [m]")
     plt.title("{}: Speed v.s. Mean Minimum Distance"
               .format(name_dict[planner]))
-    plt.ylim([0, 0.6])
+    # plt.ylim([0, 0.6])
 
     if planner == "planner":
         plt.legend(loc=2)
@@ -146,7 +146,7 @@ def plot_noise_planner(planner, i):
     plt.title("{}: Speed v.s. Mean Maximum Planner Cost"
               .format(name_dict[planner]))
     plt.legend()
-    plt.ylim([0, 0.5])
+    # plt.ylim([0, 0.5])
     plt.savefig("figures/{}_mean_max_cost_{}.pdf".format(planner, i),
                 bbox_inches="tight")
 
@@ -155,7 +155,7 @@ def plot_noise_planner(planner, i):
     plt.title("{}: Speed v.s. Mean Average Planner Cost"
               .format(name_dict[planner]))
     plt.legend()
-    plt.ylim([0, 0.06])
+    # plt.ylim([0, 0.06])
     plt.savefig("figures/{}_mean_avg_cost_{}.pdf".format(planner, i),
                 bbox_inches="tight")
 
@@ -167,7 +167,7 @@ def plot_wait_time_planner(planner, i):
                       "Mean Minimum Distance [m]")
     plt.title("{}: Speed v.s. Mean Minimum Distance"
               .format(name_dict[planner]))
-    plt.ylim([0, 0.6])
+    # plt.ylim([0, 0.6])
 
     if planner == "planner":
         plt.legend(loc=2)
@@ -273,10 +273,10 @@ def plot_noise_std_planner(planner, i):
 
 
 if __name__ == "__main__":
-    plot_noise_planner("planner", 0)
-    plot_noise_planner("pf", 0)
-    plot_noise_std_planner("planner", 0)
-    plot_noise_std_planner("pf", 0)
+    # plot_noise_planner("planner", 0)
+    # plot_noise_planner("pf", 0)
+    # plot_noise_std_planner("planner", 0)
+    # plot_noise_std_planner("pf", 0)
     plot_noise_planner("planner", 1)
     # plot_noise_planner("pf", 1)
     plot_noise_std_planner("planner", 1)
